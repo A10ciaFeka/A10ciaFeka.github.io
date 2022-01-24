@@ -23,12 +23,70 @@
             background-color: black;
             box-shadow: 1px 10px 10px black;
         }
+
+        .examenes{
+            text-align: center;
+        }
+        
+        .indicador{
+            border: 2px solid black;
+            width: 100px;
+            height: 100px;
+
+            margin: 2em auto;
+        }
+        .floatingBox{
+            font-weight: bolder;
+            
+            background-color: rgb(61, 61, 97,0.9);
+            width: fit-content;
+            border: 15px solid rgba(61, 61, 97, 0.9);
+            background-clip:padding-box;
+            border-radius: 15px;
+
+            
+            display: none;
+
+            left: 50%;
+            top: 15%;
+
+            position: absolute;
+            z-index: 3;
+        }
+
+        .floatingBox div{
+            padding: 1.5em;
+        }
+
+        .floatingBox button{
+            float: right;
+        }
     </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <h2>Atrapa los examenes</h2>
+    <div class="floatingBox">
+        <div class="closeIcon">
+            <button id="closeButton"><i class="material-icons">clear</i></button>
+        </div>
+        <div class="texto">
+            <p id="mensaje"></p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h2>Atrapa los examenes</h2>
+        </div>
+    
+        <div class="examenes">
+            <span>Examenes obtenidos</span>
+            <div class="indicador"></div>
+        </div>
+    
+        <div class="juegoGanado">
+    
+        </div>
     </div>
 </body>
 </html>

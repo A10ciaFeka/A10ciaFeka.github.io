@@ -4,8 +4,8 @@ function numRandom(){
 
 const crearTablero = ()=>{
     let tabla = document.createElement('table');
-    tabla.style.width = "500px";
-    tabla.style.height = "500px"
+    tabla.style.width = "80%";
+    tabla.style.height = "50%";
     tabla.border= "2";
     tabla.style.textAlign = "center";
 
@@ -18,15 +18,15 @@ const crearTablero = ()=>{
             let columna = document.createElement('td');
             columna.style.height = "50px";
             columna.style.width = "50px";
-            columna.textContent = "·";
             columna.style.backgroundColor = "gray";
             fila.appendChild(columna);
         }
         tabla.appendChild(fila);
     }
 
-    document.body.appendChild(tabla);
+    document.querySelector('.container').insertBefore(tabla,document.querySelector('.examenes'));
 }
+
 
 const posicionarItems = ()=>{
     const fila = document.querySelectorAll('tr');
@@ -34,6 +34,13 @@ const posicionarItems = ()=>{
     const salida = 'S';
     const examenes = 'Y';
     const villano = 'X';
+
+    for(let filas=0; filas<8; filas++){
+        for(let columna=0; columna<8; columna++){
+            fila[filas].children[columna].textContent = "·";
+        }
+    }
+
 
     fila[0].children[0].textContent = protagonista;
     fila[fila.length-1].children[fila.length-1].textContent = salida;
@@ -73,6 +80,41 @@ const getPos = (item)=>{
         }
     }
 }
+const ventanaEmergente = (perdido=false)=>{
+    document.querySelector('.floatingBox').style.display = 'block';
+    document.querySelector('.container').style.opacity='0.2';
+    if(perdido){
+        document.querySelector('.texto').firstChild.textContent = '¡Has perdido!';
+    }else{
+        document.querySelector('.texto').firstChild.textContent = '¡Has ganado!';
+    }
+        
+    document.querySelector('#closeButton').onclick= (e)=>{
+        e.preventDefault();
+
+        document.querySelector('.floatingBox').style.display = 'none';
+        document.querySelector('.container').style.opacity='1';
+    
+        posicionarItems();
+        analizarMovimiento();
+        document.querySelector('.indicador').style.backgroundColor = "gray";
+    };
+    
+}
+
+const moverJaime = ()=>{
+
+    const protagonista = 'O';
+    const villano = 'X';
+
+    let posRober=getPos(protagonista);
+    let posJaime=getPos(villano);
+
+    let x=posJaime[0]-posRober[0];
+    let y=posJaime[1]-posRober[1];
+
+    
+}
 
 
 const analizarMovimiento = ()=>{
@@ -80,6 +122,7 @@ const analizarMovimiento = ()=>{
     
     const protagonista = "O";
     const villano = 'X';
+    const salida = 'S';
     let filaProt = parseInt(getPos(protagonista)[0]);
     let columnaProt = parseInt(getPos(protagonista)[1]);
 
@@ -102,18 +145,32 @@ const analizarMovimiento = ()=>{
     
     //Derecha
     if(columnaProt+1<fila.length){
-        if(fila[filaProt].children[columnaProt+1].textContent != villano){
+        if(fila[filaProt].children[columnaProt+1].textContent != villano && fila[filaProt].children[columnaProt+1].textContent != salida){
+                
             fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
             fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
+        
         }
-
+        if(fila[filaProt].children[columnaProt+1].textContent == salida && document.querySelector('.indicador').style.backgroundColor == "green"){
+                
+            fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
+            fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
+    
+        }
     }
     
     //Abajo
     if(filaProt+1!=fila.length){
-        if(fila[filaProt+1].children[columnaProt].textContent != villano){
+        if(fila[filaProt+1].children[columnaProt].textContent != villano && fila[filaProt+1].children[columnaProt].textContent != salida){
             fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
             fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),columnaProt)}
+        }
+
+        if(fila[filaProt+1].children[columnaProt].textContent == salida && document.querySelector('.indicador').style.backgroundColor == "green"){
+                
+            fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
+            fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),columnaProt)}
+    
         }
     }
 
@@ -124,48 +181,31 @@ const analizarMovimiento = ()=>{
             fila[filaProt-1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt-1),columnaProt)}
         }
     }
-
-    //Arriba-Izquierda
-    if(filaProt-1>=0 && columnaProt-1>=0){
-        if(fila[filaProt-1].children[columnaProt-1].textContent != villano){
-            fila[filaProt-1].children[columnaProt-1].style.backgroundColor = "green";
-            fila[filaProt-1].children[columnaProt-1].onclick = ()=>{moverProtagonista((filaProt-1),(columnaProt-1))}
-        }
-    }
-
-    //Arriba-Derecha
-    if(filaProt-1>=0 && columnaProt+1<fila.length){
-        if(fila[filaProt-1].children[columnaProt+1].textContent != villano){
-            fila[filaProt-1].children[columnaProt+1].style.backgroundColor = "green";
-            fila[filaProt-1].children[columnaProt+1].onclick = ()=>{moverProtagonista((filaProt-1),(columnaProt+1))}
-        }
-    }
-
-    //Abajo-Izquierda
-    if(filaProt+1!=fila.length && columnaProt-1>=0){
-        if(fila[filaProt+1].children[columnaProt-1].textContent != villano){
-            fila[filaProt+1].children[columnaProt-1].style.backgroundColor = "green";
-            fila[filaProt+1].children[columnaProt-1].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt-1))}
-        }
-    }
-
-    //Abajo-Derecha
-    if(filaProt+1!=fila.length && columnaProt+1<fila.length){
-        if(fila[filaProt+1].children[columnaProt+1].textContent != villano){
-            fila[filaProt+1].children[columnaProt+1].style.backgroundColor = "green";
-            fila[filaProt+1].children[columnaProt+1].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt+1))}
-        }
-    }
 }
 
 const moverProtagonista = (filaFutura, columnaFutura)=>{
     const fila = document.querySelectorAll('tr');
     const protagonista = "O";
+    const examenes = "Y";
+    const salida = 'S';
+
     let filaAntigua = parseInt(getPos(protagonista)[0]);
     let columnaAntigua = parseInt(getPos(protagonista)[1]);
+    
+    if(fila[filaFutura].children[columnaFutura].textContent==salida && document.querySelector('.indicador').style.backgroundColor == "green"){
+        ventanaEmergente();
+    }else{
+        if(fila[filaFutura].children[columnaFutura].textContent==examenes){
+            document.querySelector('.indicador').style.backgroundColor = "green";
+        }
+    
+        fila[filaFutura].children[columnaFutura].textContent = protagonista;
+        fila[filaAntigua].children[columnaAntigua].textContent = "·";
+    }
+    
+    
 
-    fila[filaFutura].children[columnaFutura].textContent = protagonista;
-    fila[filaAntigua].children[columnaAntigua].textContent = "·";
+   
     
     analizarMovimiento();
 }
