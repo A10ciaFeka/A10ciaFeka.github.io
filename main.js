@@ -4,20 +4,20 @@ function numRandom(num){
 
 const crearTablero = ()=>{
     let tabla = document.createElement('table');
-    tabla.style.width = "20em";
-    tabla.style.height = "20em";
-    tabla.border= "2";
-    tabla.style.textAlign = "center";
+    // tabla.style.width = "20em";
+    // tabla.style.height = "20em";
+    // tabla.border= "2";
+    // tabla.style.textAlign = "center";
 
-    tabla.style.borderCollapse = "collapse";
-    tabla.style.margin =  "3em auto";
+    // tabla.style.borderCollapse = "collapse";
+    // tabla.style.margin =  "3em auto";
 
     for(let fila=0; fila<8; fila++){
         let fila = document.createElement('tr');
         for(let columna=0; columna<8; columna++){
             let columna = document.createElement('td');
-            columna.style.height = "50px";
-            columna.style.width = "50px";
+            // columna.style.height = "50px";
+            // columna.style.width = "50px";
             columna.style.backgroundColor = "gray";
             fila.appendChild(columna);
 

@@ -6,22 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="main.js"></script>
     <style>
+        
+        @font-face {
+            font-family: Soul;
+            src: url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+        }
+
         body{
             margin: 0;
             padding: 0;
             
             font-family: Verdana, Geneva, Tahoma, sans-serif;
-            background-color: gray;
+            background-color: white;
         }
 
         .header{
             padding: 2em;
             text-align: center;
-
+            font-family: Soul;
+            font-size: larger;
             overflow: hidden;
             color: white;
             background-color: black;
-            box-shadow: 1px 10px 10px black;
+            margin-bottom: 2em;
+           
         }
 
         .examenes{
@@ -61,6 +69,28 @@
         .floatingBox button{
             float: right;
         }
+        table{
+            margin: auto;
+            width: 800px;
+            border: 2px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        td{
+            width: 100px;
+            height: 100px;
+        }
+
+
+        @media screen and (max-width: 767px) {
+            table{
+                width: 360px;
+            }
+            td{
+                width: 40px;
+                height: 40px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Document</title>
@@ -76,7 +106,7 @@
     </div>
     <div class="container">
         <div class="header">
-            <h2>Atrapa los examenes</h2>
+            <h2>DARK TEST</h2>
         </div>
     
         <div class="examenes">
