@@ -43,8 +43,8 @@ const posicionarItems = ()=>{
         }
     }
 
-    for(let i=0; i<16; i++){
-        let ale1 = numRandom(7);
+    for(let i=0; i<10; i++){
+        let ale1 = numRandom(6)+2;
         let ale2 = numRandom(7);
 
         fila[ale1].children[ale2].textContent = obstaculo;
@@ -56,7 +56,7 @@ const posicionarItems = ()=>{
     let prep = 0;
 
     while(prep<2){
-        let ale1 = numRandom(7);
+        let ale1 = numRandom(6)+1;
         let ale2 = numRandom(7);
         
         if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
@@ -344,10 +344,6 @@ const moverProtagonista = (filaFutura, columnaFutura)=>{
         fila[filaFutura].children[columnaFutura].textContent = protagonista;
         fila[filaAntigua].children[columnaAntigua].textContent = "·";
     }
-    
-    
-
-   
     
     analizarMovimiento();
     moverVillano();
