@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @font-face {
+            font-family: dsFontBold;
+            src: url('assets/fonts/OptimusPrincepsSemiBold.ttf');
+        }
+
+        @font-face {
+            font-family: dsFont;
+            src: url('assets/fonts/OptimusPrinceps.ttf');
+        }
+        body{
+            margin: 0;
+            padding: 0;
+            
+            font-family: dsFontBold;
+            background-color: white;
+            background-image: url('assets/img/Fondo.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .header{
+            padding: 2em;
+            text-align: center;
+            font-size: larger;
+            overflow: hidden;
+            color: white;
+            background-color: black;
+            margin-bottom: 2em;
+           
+        }
+
+        .container{
+            margin: 5em auto;
+            background-color: rgb(216, 216, 216);
+            border: 1px solid rgb(216, 216, 216);
+            border-radius: 15px ;
+            width: 900px;
+            padding: 2em;
+            font-size: 20px;
+        }
+
+        .container h2{
+            text-align: center;
+        }
+
+        .container p{
+            font-family: dsFont;
+        }
+
+        @keyframes efectoBlur {
+            0%{
+                opacity: 0;
+                filter: blur(10px);
+            }
+        
+            100%{
+                opacity: 1;
+                filter: blur(0px);
+            }
+        }
+        
+        .button-6 {
+            font-family: dsFont;
+            align-items: center;
+            background-color: #FFFFFF;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: .25rem;
+            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+            box-sizing: border-box;
+            color: rgba(0, 0, 0, 0.85);
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 25px;
+            justify-content: center;
+            line-height: 1;
+            margin-top: 1em;
+            min-height: 3rem;
+            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+            position: relative;
+            text-decoration: none;
+            transition: all 250ms;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            vertical-align: baseline;
+            width: auto;
+        }
+
+        .button-6:hover,
+        .button-6:focus {
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        }
+
+        .button-6:hover {
+            transform: translateY(-1px);
+        }
+
+        .button-6:active {
+            background-color: #F0F0F1;
+            border-color: rgba(0, 0, 0, 0.15);
+            box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+            color: rgba(0, 0, 0, 0.65);
+            transform: translateY(0);
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        .boton{
+            margin-left: 2em;
+        }
+    </style>
+    <script>
+        window.onload = ()=>{
+            
+            document.querySelector('h2').style.visibility = 'visible';
+            document.querySelector('h2').style.animationName = 'efectoBlur';
+            document.querySelector('h2').style.animationDuration = '5s';
+
+            window.setTimeout(()=>{
+                console.log('llego')
+                document.querySelectorAll('p')[0].style.visibility = 'visible';
+                document.querySelectorAll('p')[0].style.animationName = 'efectoBlur';
+                document.querySelectorAll('p')[0].style.animationDuration = '5s';
+            },4500);
+
+            window.setTimeout(()=>{
+                document.querySelectorAll('p')[1].style.visibility = 'visible';
+                document.querySelectorAll('p')[1].style.animationName = 'efectoBlur';
+                document.querySelectorAll('p')[1].style.animationDuration = '5s';
+            },9000);
+            
+            window.setTimeout(()=>{
+                document.querySelectorAll('p')[2].style.visibility = 'visible';
+                document.querySelectorAll('p')[2].style.animationName = 'efectoBlur';
+                document.querySelectorAll('p')[2].style.animationDuration = '5s';
+            },13500);
+            
+                document.querySelector('button').addEventListener('click',(e)=>{
+                    let sonido = document.createElement('audio');
+                    sonido.src = 'assets/btpress.mp3';
+                    sonido.autoplay = true;
+                    sonido.hidden = true;
+    
+                    document.body.appendChild(sonido);
+    
+                    window.setTimeout(function(){
+                        document.body.removeChild(sonido);
+                        window.location.href = 'inicio.html';
+                    },3000);
+                })
+        }
+        
+    </script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <h1>Historia</h1>
+    </div>
+    <audio src="assets/Premonition.mp3" autoplay loop hidden preload="auto"></audio>
+    <div class="container">
+        <h2 style="visibility:hidden;">Hace mucho tiempo...</h2>
+        <p style="visibility:hidden;">Después de que los grandes señores cayeran y la llama fuera traicionada, el mundo fue sumado en oscuridad. Una engañosa ofrenda bañada en oro sucumbió a los débiles y escondió una gran verdad, la cual poco a poco está siendo desvelada.</p>
+        <p style="visibility:hidden;">Los caballeros de Robert fueron derrotados uno tras otro sin piedad a manos de Karamell, cuyo manejo de las lenguas fue usado para conspirar con la bruja Sabbathz, que envenenó las mentes y las almas de los valerosos caballeros. La tardía pero efectiva resolución del conflicto dio coraje y determinación a Lacobus para invadir Lordran y Medrac, las zonas más influyentes del antiguo mundo.</p>
+        <p style="visibility:hidden;">Lo que éste no sabía, era que un nónamus iba a engendrar una idea, una idea de conquista de un objeto insignificante a nivel material. Una idea que le costará todo...</p>
+    </div>
+
+    <div class="boton">
+        <button class="button-6">Volver al menu</button>
+    </div>
+</body>
+</html>
