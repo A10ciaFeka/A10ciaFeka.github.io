@@ -130,11 +130,31 @@ const ventanaEmergente = (perdido=false)=>{
         document.querySelector('.floatingBox').style.color = 'Red';
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.texto').firstChild.textContent = 'YOU DIED';
+
+        let sonido = document.createElement('audio');
+        sonido.src = 'assets/died.mp3';
+        sonido.autoplay = true;
+        sonido.hidden = true;
+
+        document.body.appendChild(sonido);
+        window.setTimeout(function(){
+            document.body.removeChild(sonido);
+        },8000);
     }else{
         document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.floatingBox').style.color = 'Yellow';
         document.querySelector('.texto').firstChild.textContent = 'YOU DEFEATED';
+        let sonido = document.createElement('audio');
+        sonido.src = 'assets/defeated.mp3';
+        sonido.autoplay = true;
+        sonido.volume = '0.5';
+        sonido.hidden = true;
+
+        document.body.appendChild(sonido);
+        window.setTimeout(function(){
+            document.body.removeChild(sonido);
+        },13000);
     }
         
     document.querySelector('#closeButton').onclick= (e)=>{
