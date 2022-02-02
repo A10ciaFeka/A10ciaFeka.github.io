@@ -27,31 +27,55 @@ const crearTablero = ()=>{
 
     document.querySelector('.container').insertBefore(tabla,document.querySelector('.examenes'));
 }
-var protagonista = "O";
-var villano = 'X';
-var salida = 'S';
-var examenes = 'Y';
-var obstaculo = '[]';
+var protagonista = document.createElement('img');
+protagonista.id = 'protagonista';
+protagonista.src = 'assets/img/npc.gif';
 
+var villano = document.createElement('img');
+villano.id = 'villano';
+villano.src = 'assets/img/malo.gif';
+
+var salida = document.createElement('img');
+salida.id = 'salida';
+salida.src = 'assets/img/salida.png';
+
+var examenes = document.createElement('img');
+examenes.id = 'examenes'
+examenes.src = 'assets/img/Ember.png';
+
+var obstaculoSrc = 'assets/img/obstaculo.png';
 
 const posicionarItems = ()=>{
     const fila = document.querySelectorAll('tr');
 
-    for(let filas=0; filas<8; filas++){
-        for(let columna=0; columna<8; columna++){
-            fila[filas].children[columna].textContent = "·";
+    for(let numFila=0; numFila<fila.length; numFila++){
+        for(let numColumna=0; numColumna<fila.length; numColumna++){
+            if(fila[numFila].children[numColumna].firstChild){
+
+                fila[numFila].children[numColumna].removeChild(fila[numFila].children[numColumna].firstChild);
+            }
         }
     }
 
-    for(let i=0; i<10; i++){
-        let ale1 = numRandom(6)+2;
+    let obstaculoContador = 0;
+    while(obstaculoContador<8){
+        let ale1 = numRandom(6)+1;
         let ale2 = numRandom(7);
-
-        fila[ale1].children[ale2].textContent = obstaculo;
+        
+        if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
+            if(!fila[ale1].children[ale2].hasChildNodes()){
+                console.log('llego');
+                let ObsImg = document.createElement('img');
+                ObsImg.className = 'obstaculo';
+                ObsImg.src = obstaculoSrc;
+                fila[ale1].children[ale2].appendChild(ObsImg);
+                obstaculoContador++;                 
+            }
+        }
     }
 
-    fila[0].children[0].textContent = protagonista;
-    fila[fila.length-1].children[fila.length-1].textContent = salida;
+    fila[0].children[0].appendChild(protagonista);
+    fila[fila.length-1].children[fila.length-1].appendChild(salida);
 
     let prep = 0;
 
@@ -61,11 +85,15 @@ const posicionarItems = ()=>{
         
         if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
             if(prep==0){
-                fila[ale1].children[ale2].textContent = villano;
-                prep++;
+                if(!fila[ale1].children[ale2].hasChildNodes()){
+                    fila[ale1].children[ale2].appendChild(villano);
+                    prep++;
+                }
             }else if(prep==1 && fila[ale1].children[ale2].textContent!=villano){
-                fila[ale1].children[ale2].textContent = examenes;
-                prep++;
+                if(!fila[ale1].children[ale2].hasChildNodes()){
+                    fila[ale1].children[ale2].appendChild(examenes);
+                    prep++;
+                }
             }
             
         }
@@ -77,13 +105,17 @@ const posicionarItems = ()=>{
 *   FUNCIÓN PRIVADA
 *
 */
-const getPos = (item)=>{
+
+//En principio funciona
+const getPos = (id)=>{
     const fila = document.querySelectorAll('tr');
     
     for(let numFila in fila){
-        for(let numColumna in fila[numFila].children   ){
-            if(fila[numFila].children[numColumna].textContent == item){
-                return new Array(numFila,numColumna);
+        for(let numColumna in fila[numFila].children){
+            if(fila[numFila].children[numColumna].firstChild){
+                if(fila[numFila].children[numColumna].firstChild.id == id){
+                    return new Array(numFila,numColumna);
+                }
             }
         }
     }
@@ -130,56 +162,75 @@ const ordenarMapa = (mapa)=>{
 }
 
 const moverVillanoDerecha = (fila,filaVillano, columnaVillano)=>{
-    if(columnaVillano+1<fila.length && fila[filaVillano].children[columnaVillano+1].textContent!=examenes && fila[filaVillano].children[columnaVillano+1].textContent!=obstaculo){
-        if(fila[filaVillano].children[columnaVillano+1].textContent==protagonista){
-            ventanaEmergente(true);
-        }
-        fila[filaVillano].children[columnaVillano+1].textContent = villano;
-        fila[filaVillano].children[columnaVillano+1].style.backgroundColor = "gray";
-        fila[filaVillano].children[columnaVillano+1].onclick = null;
-        
-        fila[filaVillano].children[columnaVillano].textContent = '·';
+    if(columnaVillano+1<fila.length){
+        if(fila[filaVillano].children[columnaVillano+1].firstChild){
+            if(fila[filaVillano].children[columnaVillano+1].firstChild.className!='obstaculo' && fila[filaVillano].children[columnaVillano+1].firstChild.id!='examenes'){
+                fila[filaVillano].children[columnaVillano+1].appendChild(villano);
+                fila[filaVillano].children[columnaVillano+1].style.backgroundColor = "gray";
+                fila[filaVillano].children[columnaVillano+1].onclick = null;                
+            }
+        }else{
 
+            fila[filaVillano].children[columnaVillano+1].appendChild(villano);
+            fila[filaVillano].children[columnaVillano+1].style.backgroundColor = "gray";
+            fila[filaVillano].children[columnaVillano+1].onclick = null;                
+            
+        }
+        
     }
 }
 
 const moverVillanoIzquierda = (fila = document.querySelectorAll('tr'),filaVillano, columnaVillano)=>{
-    if(columnaVillano-1>=0 && fila[filaVillano].children[columnaVillano-1].textContent!=examenes && fila[filaVillano].children[columnaVillano-1].textContent!=obstaculo){
-        if(fila[filaVillano].children[columnaVillano-1].textContent==protagonista){
-            ventanaEmergente(true);
-        }
-        fila[filaVillano].children[columnaVillano-1].textContent = villano;
-        fila[filaVillano].children[columnaVillano-1].style.backgroundColor = "gray";
-        fila[filaVillano].children[columnaVillano-1].onclick = null;
-        fila[filaVillano].children[columnaVillano].textContent = '·';
+    if(columnaVillano-1>=0){
+        if(fila[filaVillano].children[columnaVillano-1].firstChild){
+            if(fila[filaVillano].children[columnaVillano-1].firstChild.className!='obstaculo' && fila[filaVillano].children[columnaVillano-1].firstChild.id!='examenes'){
+                fila[filaVillano].children[columnaVillano-1].appendChild(villano);
+                fila[filaVillano].children[columnaVillano-1].style.backgroundColor = "gray";
+                fila[filaVillano].children[columnaVillano-1].onclick = null;                
+            }
+        }else{
 
+            fila[filaVillano].children[columnaVillano-1].appendChild(villano);
+            fila[filaVillano].children[columnaVillano-1].style.backgroundColor = "gray";
+            fila[filaVillano].children[columnaVillano-1].onclick = null;            
+        }
+    
     }
 }
 
 const moverVillanoAbajo = (fila = document.querySelectorAll('tr'),filaVillano, columnaVillano)=>{
-    if(filaVillano+1<fila.length && fila[filaVillano+1].children[columnaVillano].textContent!=examenes && fila[filaVillano+1].children[columnaVillano].textContent!=obstaculo){
-        if(fila[filaVillano+1].children[columnaVillano].textContent==protagonista){
-            ventanaEmergente(true);
-        }
-        fila[filaVillano+1].children[columnaVillano].textContent = villano;
-        fila[filaVillano+1].children[columnaVillano].style.backgroundColor = "gray";
-        fila[filaVillano+1].children[columnaVillano].onclick = null;
-        
-        fila[filaVillano].children[columnaVillano].textContent = '·';
+    if(filaVillano+1<fila.length){
+        if(fila[filaVillano+1].children[columnaVillano].firstChild){
+            if(fila[filaVillano+1].children[columnaVillano].firstChild.className!='obstaculo' && fila[filaVillano+1].children[columnaVillano].firstChild.id!='examenes'){
+                fila[filaVillano+1].children[columnaVillano].appendChild(villano);
+                fila[filaVillano+1].children[columnaVillano].style.backgroundColor = "gray";
+                fila[filaVillano+1].children[columnaVillano].onclick = null;                
+            }
+        }else{
 
+            fila[filaVillano+1].children[columnaVillano].appendChild(villano);
+            fila[filaVillano+1].children[columnaVillano].style.backgroundColor = "gray";
+            fila[filaVillano+1].children[columnaVillano].onclick = null;            
+        }
+    
     }
 }
 
 const moverVillanoArriba = (fila = document.querySelectorAll('tr'),filaVillano, columnaVillano)=>{
-    if(filaVillano-1>=0 && fila[filaVillano-1].children[columnaVillano].textContent!=examenes && fila[filaVillano-1].children[columnaVillano].textContent!=obstaculo){
-        if(fila[filaVillano-1].children[columnaVillano].textContent==protagonista){
-            ventanaEmergente(true);
-        }
-        fila[filaVillano-1].children[columnaVillano].textContent = villano;
-        fila[filaVillano-1].children[columnaVillano].style.backgroundColor = "gray";
-        fila[filaVillano-1].children[columnaVillano].onclick = null;
-        fila[filaVillano].children[columnaVillano].textContent = '·';
+    if(filaVillano-1>=0){
+        if(fila[filaVillano-1].children[columnaVillano].firstChild){
 
+            if(fila[filaVillano-1].children[columnaVillano].firstChild.className!='obstaculo' && fila[filaVillano-1].children[columnaVillano].firstChild.id!='examenes' ){
+                fila[filaVillano-1].children[columnaVillano].appendChild(villano);
+                fila[filaVillano-1].children[columnaVillano].style.backgroundColor = "gray";
+                fila[filaVillano-1].children[columnaVillano].onclick = null;                
+            }
+        }else{
+            fila[filaVillano-1].children[columnaVillano].appendChild(villano);
+            fila[filaVillano-1].children[columnaVillano].style.backgroundColor = "gray";
+            fila[filaVillano-1].children[columnaVillano].onclick = null;       
+        }
+             
         
     }
 }
@@ -187,11 +238,11 @@ const moverVillanoArriba = (fila = document.querySelectorAll('tr'),filaVillano, 
 const moverVillano = ()=>{
     const fila = document.querySelectorAll('tr');
 
-    let filaProta = parseInt(getPos(protagonista)[0]);
-    let columnaProta = parseInt(getPos(protagonista)[1]);
+    let filaProta = parseInt(getPos('protagonista')[0]);
+    let columnaProta = parseInt(getPos('protagonista')[1]);
 
-    let filaVillano = parseInt(getPos(villano)[0]);
-    let columnaVillano = parseInt(getPos(villano)[1]);
+    let filaVillano = parseInt(getPos('villano')[0]);
+    let columnaVillano = parseInt(getPos('villano')[1]);
 
     let mapaValores = new Map();
 
@@ -211,51 +262,75 @@ const moverVillano = ()=>{
 
     if(mapaValores.get("A")!=undefined){
         //Arriba
-        if(fila[filaVillano-1].children[columnaVillano].textContent!=obstaculo){
-            moverVillanoArriba(fila, filaVillano, columnaVillano);
-
-        }else if(fila[filaVillano-1].children[columnaVillano].textContent==obstaculo){
-            if(derecha<izquierda){
-                moverVillanoDerecha(fila, filaVillano, columnaVillano);
-            }else{
-                moverVillanoIzquierda(fila, filaVillano, columnaVillano);
+        if(fila[filaVillano-1].children[columnaVillano].firstChild){
+            if(fila[filaVillano-1].children[columnaVillano].firstChild.className=='obstaculo'){
+                if(derecha<izquierda){
+                    moverVillanoDerecha(fila, filaVillano, columnaVillano);
+                }else{
+                    moverVillanoIzquierda(fila, filaVillano, columnaVillano);
+                }
+            }else if(fila[filaVillano-1].children[columnaVillano].firstChild.id=='protagonista'){
+                moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                ventanaEmergente(true);
             }
+        }else{
+            moverVillanoArriba(fila, filaVillano, columnaVillano);
         }
         
     }else if(mapaValores.get("Ab")!=undefined){
         //Abajo
-        if(fila[filaVillano+1].children[columnaVillano].textContent!=obstaculo){
-            moverVillanoAbajo(fila, filaVillano, columnaVillano);
-
-        }else if(fila[filaVillano+1].children[columnaVillano].textContent==obstaculo){
-            if(derecha<izquierda){
-                moverVillanoDerecha(fila, filaVillano, columnaVillano);
-            }else{
-                moverVillanoIzquierda(fila, filaVillano, columnaVillano);
+        if(fila[filaVillano+1].children[columnaVillano].firstChild){
+            
+            if(fila[filaVillano+1].children[columnaVillano].firstChild.className=='obstaculo'){
+                if(derecha<izquierda){
+                    moverVillanoDerecha(fila, filaVillano, columnaVillano);
+                }else{
+                    moverVillanoIzquierda(fila, filaVillano, columnaVillano);
+                }
+            }else if(fila[filaVillano+1].children[columnaVillano].firstChild.id=='protagonista'){
+                moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                ventanaEmergente(true);
             }
+        }else{
+            moverVillanoAbajo(fila, filaVillano, columnaVillano);
         }
+
 
     }else if(mapaValores.get("D")!=undefined){
         //Derecha
-        if(fila[filaVillano].children[columnaVillano+1].textContent!=obstaculo){
-            moverVillanoDerecha(fila, filaVillano, columnaVillano);
-        }else if(fila[filaVillano].children[columnaVillano+1].textContent==obstaculo){
-            if(arriba<abajo){
-                moverVillanoArriba(fila, filaVillano, columnaVillano);
-            }else{
+        if(fila[filaVillano].children[columnaVillano+1].firstChild){
+
+            if(fila[filaVillano].children[columnaVillano+1].firstChild.className=='obstaculo'){
+                if(arriba<abajo){
+                    moverVillanoArriba(fila, filaVillano, columnaVillano);
+                }else{
+                    moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                }
+            }else if(fila[filaVillano].children[columnaVillano+1].firstChild.id=='protagonista'){
                 moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                ventanaEmergente(true);
             }
+        }else{
+
+            moverVillanoDerecha(fila, filaVillano, columnaVillano);
         }
     }else{
         //Izquierda
-        if(fila[filaVillano].children[columnaVillano-1].textContent!=obstaculo){
-            moverVillanoIzquierda(fila, filaVillano, columnaVillano);
-        }else if(fila[filaVillano].children[columnaVillano+1].textContent==obstaculo){
-            if(arriba<abajo){
-                moverVillanoArriba(fila, filaVillano, columnaVillano);
-            }else{
+        if(fila[filaVillano].children[columnaVillano-1].firstChild){
+            if(fila[filaVillano].children[columnaVillano-1].firstChild.className=='obstaculo'){
+                if(arriba<abajo){
+                    moverVillanoArriba(fila, filaVillano, columnaVillano);
+                }else{
+                    moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                }
+            }else if(fila[filaVillano].children[columnaVillano-1].firstChild.id=='protagonista'){
                 moverVillanoAbajo(fila, filaVillano, columnaVillano);
+                ventanaEmergente(true);
             }
+
+        }else{
+
+            moverVillanoIzquierda(fila, filaVillano, columnaVillano);
         }
     }
 }
@@ -265,8 +340,9 @@ const analizarMovimiento = ()=>{
     const fila = document.querySelectorAll('tr');
     
     
-    let filaProt = parseInt(getPos(protagonista)[0]);
-    let columnaProt = parseInt(getPos(protagonista)[1]);
+
+    let filaProt = parseInt(getPos('protagonista')[0]);
+    let columnaProt = parseInt(getPos('protagonista')[1]);
 
     for(let numFila=0; numFila<fila.length; numFila++){
         for(let numColumna=0; numColumna<fila.length; numColumna++){
@@ -278,7 +354,19 @@ const analizarMovimiento = ()=>{
 
     //Izquierda
     if(columnaProt-1>=0){
-        if(fila[filaProt].children[columnaProt-1].textContent != villano && fila[filaProt].children[columnaProt-1].textContent != obstaculo){
+        
+        if(fila[filaProt].children[columnaProt-1].firstChild){
+            if(fila[filaProt].children[columnaProt-1].firstChild.id != 'villano' && fila[filaProt].children[columnaProt-1].firstChild.className != 'obstaculo'){
+                fila[filaProt].children[columnaProt-1].style.backgroundColor = "gray";
+                fila[filaProt].children[columnaProt-1].onclick = null;
+            }
+            if(fila[filaProt].children[columnaProt-1].firstChild.id == 'examenes'){
+                
+                fila[filaProt].children[columnaProt-1].style.backgroundColor = "green";
+                fila[filaProt].children[columnaProt-1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt-1))}
+                
+            }
+        }else{
             fila[filaProt].children[columnaProt-1].style.backgroundColor = "green";
             fila[filaProt].children[columnaProt-1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt-1))}  
         }
@@ -287,38 +375,79 @@ const analizarMovimiento = ()=>{
     
     //Derecha
     if(columnaProt+1<fila.length){
-        if(fila[filaProt].children[columnaProt+1].textContent != villano && fila[filaProt].children[columnaProt+1].textContent != salida && fila[filaProt].children[columnaProt+1].textContent != obstaculo){
-                
-            fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
-            fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
         
-        }
-        if(fila[filaProt].children[columnaProt+1].textContent == salida && document.querySelector('.indicador').style.backgroundColor == "green"){
+        if(fila[filaProt].children[columnaProt+1].firstChild){
+            
+            if(fila[filaProt].children[columnaProt+1].firstChild.id == 'villano' && fila[filaProt].children[columnaProt+1].firstChild.id != 'salida' && fila[filaProt].children[columnaProt+1].firstChild.className == 'obstaculo'){
                 
+                fila[filaProt].children[columnaProt+1].style.backgroundColor = "gray";
+                fila[filaProt].children[columnaProt+1].onclick = null;
+                
+            }
+            if(fila[filaProt].children[columnaProt+1].firstChild.id == 'salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
+                
+                fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
+                fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
+                
+            }
+
+            if(fila[filaProt].children[columnaProt+1].firstChild.id == 'examenes'){
+                
+                fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
+                fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
+                
+            }
+        }else{
             fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
             fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
-    
+
         }
     }
     
     //Abajo
     if(filaProt+1!=fila.length){
-        if(fila[filaProt+1].children[columnaProt].textContent != villano && fila[filaProt+1].children[columnaProt].textContent != salida && fila[filaProt+1].children[columnaProt].textContent != obstaculo){
-            fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
-            fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),columnaProt)}
-        }
-
-        if(fila[filaProt+1].children[columnaProt].textContent == salida && document.querySelector('.indicador').style.backgroundColor == "green"){
+        
+        if(fila[filaProt+1].children[columnaProt].firstChild){
+            
+            if(fila[filaProt+1].children[columnaProt].firstChild.id == 'villano' || fila[filaProt+1].children[columnaProt].firstChild.id == 'salida' || fila[filaProt+1].children[columnaProt].firstChild.className == 'obstaculo'){
                 
+                fila[filaProt+1].children[columnaProt].style.backgroundColor = "gray";
+                fila[filaProt+1].children[columnaProt].onclick = null;
+                
+            }
+            if(fila[filaProt+1].children[columnaProt].firstChild.id == 'salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
+                
+                fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
+                fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt))}
+                
+            }
+            if(fila[filaProt+1].children[columnaProt].firstChild.id == 'examenes'){
+                
+                fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
+                fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt))}
+                
+            }
+            
+        }else{
+            
             fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
             fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),columnaProt)}
-    
         }
     }
 
     //Arriba
     if(filaProt-1>=0){
-        if(fila[filaProt-1].children[columnaProt].textContent != villano && fila[filaProt-1].children[columnaProt].textContent != obstaculo){
+        
+        if(fila[filaProt-1].children[columnaProt].firstChild){
+            if(fila[filaProt-1].children[columnaProt].firstChild.id != 'villano' && fila[filaProt-1].children[columnaProt].firstChild.className != 'obstaculo'){
+                fila[filaProt-1].children[columnaProt].style.backgroundColor = "gray";
+                fila[filaProt-1].children[columnaProt].onclick = null
+            }
+            if(fila[filaProt-1].children[columnaProt].firstChild.id == 'examenes'){
+                fila[filaProt-1].children[columnaProt].style.backgroundColor = "green";
+                fila[filaProt-1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt-1),columnaProt)}
+            }
+        }else{
             fila[filaProt-1].children[columnaProt].style.backgroundColor = "green";
             fila[filaProt-1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt-1),columnaProt)}
         }
@@ -328,21 +457,21 @@ const analizarMovimiento = ()=>{
 
 const moverProtagonista = (filaFutura, columnaFutura)=>{
     const fila = document.querySelectorAll('tr');
-    
 
-    let filaAntigua = parseInt(getPos(protagonista)[0]);
-    let columnaAntigua = parseInt(getPos(protagonista)[1]);
     
-    if(fila[filaFutura].children[columnaFutura].textContent==salida && document.querySelector('.indicador').style.backgroundColor == "green"){
-        ventanaEmergente();
-        return true;
-    }else{
-        if(fila[filaFutura].children[columnaFutura].textContent==examenes){
-            document.querySelector('.indicador').style.backgroundColor = "green";
+    if(fila[filaFutura].children[columnaFutura].firstChild){
+        if(fila[filaFutura].children[columnaFutura].firstChild.id=='salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
+            ventanaEmergente();
+            return true;
+        }else{
+            if(fila[filaFutura].children[columnaFutura].firstChild.id=='examenes'){
+                document.querySelector('.indicador').style.backgroundColor = "green";
+                fila[filaFutura].children[columnaFutura].removeChild(fila[filaFutura].children[columnaFutura].firstChild);
+                fila[filaFutura].children[columnaFutura].appendChild(protagonista);
+            }        
         }
-    
-        fila[filaFutura].children[columnaFutura].textContent = protagonista;
-        fila[filaAntigua].children[columnaAntigua].textContent = "·";
+    }else{
+        fila[filaFutura].children[columnaFutura].appendChild(protagonista);
     }
     
     analizarMovimiento();
