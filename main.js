@@ -1,16 +1,11 @@
+
 function numRandom(num){
     return Math.floor(Math.random()*num);
 }
 
 const crearTablero = ()=>{
     let tabla = document.createElement('table');
-    // tabla.style.width = "20em";
-    // tabla.style.height = "20em";
-    // tabla.border= "2";
-    // tabla.style.textAlign = "center";
-
-    // tabla.style.borderCollapse = "collapse";
-    // tabla.style.margin =  "3em auto";
+    
 
     for(let fila=0; fila<8; fila++){
         let fila = document.createElement('tr');
@@ -19,6 +14,8 @@ const crearTablero = ()=>{
             // columna.style.height = "50px";
             // columna.style.width = "50px";
             columna.style.backgroundColor = "gray";
+            columna.style.backgroundImage = 'url(assets/img/suelo.png)';
+            columna.style.backgroundSize = 'cover';
             fila.appendChild(columna);
 
         }
@@ -64,7 +61,6 @@ const posicionarItems = ()=>{
         
         if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
             if(!fila[ale1].children[ale2].hasChildNodes()){
-                console.log('llego');
                 let ObsImg = document.createElement('img');
                 ObsImg.className = 'obstaculo';
                 ObsImg.src = obstaculoSrc;
@@ -333,6 +329,7 @@ const moverVillano = ()=>{
             moverVillanoIzquierda(fila, filaVillano, columnaVillano);
         }
     }
+    fila[getPos('villano')[0]].children[getPos('villano')[1]].style.backgroundImage = 'url(assets/img/suelo.png)';
 }
 
 
@@ -346,6 +343,8 @@ const analizarMovimiento = ()=>{
 
     for(let numFila=0; numFila<fila.length; numFila++){
         for(let numColumna=0; numColumna<fila.length; numColumna++){
+            fila[numFila].children[numColumna].style.backgroundImage = 'url(assets/img/suelo.png)';
+            fila[numFila].children[numColumna].style.backgroundSize = 'cover';
             fila[numFila].children[numColumna].style.backgroundColor = "gray";
             fila[numFila].children[numColumna].onclick = null;
                         
@@ -356,17 +355,19 @@ const analizarMovimiento = ()=>{
     if(columnaProt-1>=0){
         
         if(fila[filaProt].children[columnaProt-1].firstChild){
-            if(fila[filaProt].children[columnaProt-1].firstChild.id != 'villano' && fila[filaProt].children[columnaProt-1].firstChild.className != 'obstaculo'){
+            if(fila[filaProt].children[columnaProt-1].firstChild.id == 'villano' || fila[filaProt].children[columnaProt-1].firstChild.className == 'obstaculo'){
                 fila[filaProt].children[columnaProt-1].style.backgroundColor = "gray";
                 fila[filaProt].children[columnaProt-1].onclick = null;
             }
             if(fila[filaProt].children[columnaProt-1].firstChild.id == 'examenes'){
-                
+
+                fila[filaProt].children[columnaProt-1].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt].children[columnaProt-1].style.backgroundColor = "green";
                 fila[filaProt].children[columnaProt-1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt-1))}
                 
             }
         }else{
+            fila[filaProt].children[columnaProt-1].style.backgroundImage = 'url(assets/img/camino.png)';
             fila[filaProt].children[columnaProt-1].style.backgroundColor = "green";
             fila[filaProt].children[columnaProt-1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt-1))}  
         }
@@ -386,6 +387,7 @@ const analizarMovimiento = ()=>{
             }
             if(fila[filaProt].children[columnaProt+1].firstChild.id == 'salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
                 
+                fila[filaProt].children[columnaProt+1].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
                 fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
                 
@@ -393,11 +395,13 @@ const analizarMovimiento = ()=>{
 
             if(fila[filaProt].children[columnaProt+1].firstChild.id == 'examenes'){
                 
+                fila[filaProt].children[columnaProt+1].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
                 fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
                 
             }
         }else{
+            fila[filaProt].children[columnaProt+1].style.backgroundImage = 'url(assets/img/camino.png)';
             fila[filaProt].children[columnaProt+1].style.backgroundColor = "green";
             fila[filaProt].children[columnaProt+1].onclick = ()=>{moverProtagonista(filaProt,(columnaProt+1))}
 
@@ -417,19 +421,21 @@ const analizarMovimiento = ()=>{
             }
             if(fila[filaProt+1].children[columnaProt].firstChild.id == 'salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
                 
+                fila[filaProt+1].children[columnaProt].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
                 fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt))}
                 
             }
             if(fila[filaProt+1].children[columnaProt].firstChild.id == 'examenes'){
                 
+                fila[filaProt+1].children[columnaProt].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
                 fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),(columnaProt))}
                 
             }
             
         }else{
-            
+            fila[filaProt+1].children[columnaProt].style.backgroundImage = 'url(assets/img/camino.png)';
             fila[filaProt+1].children[columnaProt].style.backgroundColor = "green";
             fila[filaProt+1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt+1),columnaProt)}
         }
@@ -439,15 +445,17 @@ const analizarMovimiento = ()=>{
     if(filaProt-1>=0){
         
         if(fila[filaProt-1].children[columnaProt].firstChild){
-            if(fila[filaProt-1].children[columnaProt].firstChild.id != 'villano' && fila[filaProt-1].children[columnaProt].firstChild.className != 'obstaculo'){
+            if(fila[filaProt-1].children[columnaProt].firstChild.id == 'villano' || fila[filaProt-1].children[columnaProt].firstChild.className == 'obstaculo'){
                 fila[filaProt-1].children[columnaProt].style.backgroundColor = "gray";
                 fila[filaProt-1].children[columnaProt].onclick = null
             }
             if(fila[filaProt-1].children[columnaProt].firstChild.id == 'examenes'){
+                fila[filaProt-1].children[columnaProt].style.backgroundImage = 'url(assets/img/camino.png)';
                 fila[filaProt-1].children[columnaProt].style.backgroundColor = "green";
                 fila[filaProt-1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt-1),columnaProt)}
             }
         }else{
+            fila[filaProt-1].children[columnaProt].style.backgroundImage = 'url(assets/img/camino.png)';
             fila[filaProt-1].children[columnaProt].style.backgroundColor = "green";
             fila[filaProt-1].children[columnaProt].onclick = ()=>{moverProtagonista((filaProt-1),columnaProt)}
         }
@@ -457,8 +465,7 @@ const analizarMovimiento = ()=>{
 
 const moverProtagonista = (filaFutura, columnaFutura)=>{
     const fila = document.querySelectorAll('tr');
-
-    
+ 
     if(fila[filaFutura].children[columnaFutura].firstChild){
         if(fila[filaFutura].children[columnaFutura].firstChild.id=='salida' && document.querySelector('.indicador').style.backgroundColor == "green"){
             ventanaEmergente();
@@ -487,8 +494,7 @@ const comprobarVerde = ()=>{
         for(let numColumna=0; numColumna<fila.length; numColumna++){
             if(fila[numFila].children[numColumna].style.backgroundColor == "green"){
                 return true;
-            }
-                        
+            }                     
         }
     }
     return false;
