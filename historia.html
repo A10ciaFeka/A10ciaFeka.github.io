@@ -125,42 +125,37 @@
             document.querySelector('h2').style.animationName = 'efectoBlur';
             document.querySelector('h2').style.animationDuration = '5s';
 
-            window.setTimeout(()=>{
-                console.log('llego')
-                document.querySelectorAll('p')[0].style.visibility = 'visible';
-                document.querySelectorAll('p')[0].style.animationName = 'efectoBlur';
-                document.querySelectorAll('p')[0].style.animationDuration = '5s';
-            },4500);
+            let par = document.querySelectorAll('p');
+            let contador = 0;
 
-            window.setTimeout(()=>{
-                document.querySelectorAll('p')[1].style.visibility = 'visible';
-                document.querySelectorAll('p')[1].style.animationName = 'efectoBlur';
-                document.querySelectorAll('p')[1].style.animationDuration = '5s';
-            },9000);
-            
-            window.setTimeout(()=>{
-                document.querySelectorAll('p')[2].style.visibility = 'visible';
-                document.querySelectorAll('p')[2].style.animationName = 'efectoBlur';
-                document.querySelectorAll('p')[2].style.animationDuration = '5s';
-            },13500);
-            
-                document.querySelector('button').addEventListener('click',(e)=>{
-                    let sonido = document.createElement('audio');
-                    sonido.src = 'assets/btpress.mp3';
-                    sonido.autoplay = true;
-                    sonido.hidden = true;
-    
-                    document.body.appendChild(sonido);
-    
-                    window.setTimeout(function(){
-                        document.body.removeChild(sonido);
-                        window.location.href = 'inicio.html';
-                    },3000);
-                })
+            const timer = setInterval(()=>{
+                if(contador==par.length){
+                    clearInterval(timer);
+                }else{
+                    par[contador].style.visibility = 'visible';
+                    par[contador].style.animationName = 'efectoBlur';
+                    par[contador].style.animationDuration = '5s';
+                    contador++;
+                }
+            },4500)
+
+            document.querySelector('button').addEventListener('click',(e)=>{
+                let sonido = document.createElement('audio');
+                sonido.src = 'assets/btpress.mp3';
+                sonido.autoplay = true;
+                sonido.hidden = true;
+
+                document.body.appendChild(sonido);
+
+                window.setTimeout(function(){
+                    document.body.removeChild(sonido);
+                    window.location.href = 'inicio.html';
+                },3000);
+            })
         }
         
     </script>
-    <title>Document</title>
+    <title>Historia - Dark Tests</title>
 </head>
 <body>
     <div class="header">
@@ -169,7 +164,7 @@
     <audio src="assets/Premonition.mp3" autoplay loop hidden preload="auto"></audio>
     <div class="container">
         <h2 style="visibility:hidden;">Hace mucho tiempo...</h2>
-        <p style="visibility:hidden;">Después de que los grandes señores cayeran y la llama fuera traicionada, el mundo fue sumado en oscuridad. Una engañosa ofrenda bañada en oro sucumbió a los débiles y escondió una gran verdad, la cual poco a poco está siendo desvelada.</p>
+        <p style="visibility:hidden;">Después de que los grandes señores cayeran y la llama fuera traicionada, el mundo fue sumido en oscuridad. Una engañosa ofrenda bañada en oro sucumbió a los débiles y escondió una gran verdad, la cual poco a poco está siendo desvelada.</p>
         <p style="visibility:hidden;">Los caballeros de Robert fueron derrotados uno tras otro sin piedad a manos de Karamell, cuyo manejo de las lenguas fue usado para conspirar con la bruja Sabbathz, que envenenó las mentes y las almas de los valerosos caballeros. La tardía pero efectiva resolución del conflicto dio coraje y determinación a Lacobus para invadir Lordran y Medrac, las zonas más influyentes del antiguo mundo.</p>
         <p style="visibility:hidden;">Lo que éste no sabía, era que un nónamus iba a engendrar una idea, una idea de conquista de un objeto insignificante a nivel material. Una idea que le costará todo...</p>
     </div>
