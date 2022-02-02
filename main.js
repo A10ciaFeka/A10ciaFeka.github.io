@@ -126,9 +126,15 @@ const ventanaEmergente = (perdido=false)=>{
                 fila[numFila].children[numColumna].style.backgroundColor = "red";
             }
         }
-        document.querySelector('.texto').firstChild.textContent = '¡Has perdido!';
+        document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
+        document.querySelector('.floatingBox').style.color = 'Red';
+        document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
+        document.querySelector('.texto').firstChild.textContent = 'YOU DIED';
     }else{
-        document.querySelector('.texto').firstChild.textContent = '¡Has ganado!';
+        document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
+        document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
+        document.querySelector('.floatingBox').style.color = 'Yellow';
+        document.querySelector('.texto').firstChild.textContent = 'YOU DEFEATED';
     }
         
     document.querySelector('#closeButton').onclick= (e)=>{
