@@ -1,11 +1,13 @@
 {
   "name": "nodejs",
   "version": "1.0.0",
+  "engines": {
+    "npm": "8.1.2"
+  },
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "src/index.js"
+    "start": "node src/index.js"
   },
   "keywords": [],
   "author": "",
