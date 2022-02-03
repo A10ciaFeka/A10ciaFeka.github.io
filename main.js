@@ -1,4 +1,5 @@
 
+
 function numRandom(num){
     return Math.floor(Math.random()*num);
 }
@@ -24,6 +25,9 @@ const crearTablero = ()=>{
 
     document.querySelector('.container').insertBefore(tabla,document.querySelector('.examenes'));
 }
+
+var canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3'];
+
 var protagonista = document.createElement('img');
 protagonista.id = 'protagonista';
 protagonista.src = 'assets/img/npc.gif';
@@ -76,7 +80,7 @@ const posicionarItems = ()=>{
     let prep = 0;
 
     while(prep<2){
-        let ale1 = numRandom(6)+1;
+        let ale1 = numRandom(5)+1;
         let ale2 = numRandom(7);
         
         if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
@@ -120,46 +124,45 @@ const ventanaEmergente = (perdido=false)=>{
     document.querySelector('.floatingBox').style.display = 'block';
     document.querySelector('.container').style.opacity='0.2';
     let fila = document.querySelectorAll('tr');
+
+    document.querySelector('#mainSong').volume = '0.1';
+    let sonido;
+
     if(perdido){
-        for(let numFila=0; numFila<fila.length; numFila++){
-            for(let numColumna=0; numColumna<fila.length; numColumna++){
-                fila[numFila].children[numColumna].style.backgroundColor = "red";
-            }
-        }
+        
         document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
         document.querySelector('.floatingBox').style.color = 'Red';
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.texto').firstChild.textContent = 'YOU DIED';
 
-        let sonido = document.createElement('audio');
+        sonido = document.createElement('audio');
         sonido.src = 'assets/died.mp3';
         sonido.autoplay = true;
+        sonido.volume = '1';
         sonido.hidden = true;
 
+
         document.body.appendChild(sonido);
-        window.setTimeout(function(){
-            document.body.removeChild(sonido);
-        },8000);
     }else{
         document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.floatingBox').style.color = 'Yellow';
         document.querySelector('.texto').firstChild.textContent = 'YOU DEFEATED';
-        let sonido = document.createElement('audio');
+
+        sonido = document.createElement('audio');
         sonido.src = 'assets/defeated.mp3';
         sonido.autoplay = true;
         sonido.volume = '0.5';
         sonido.hidden = true;
 
+
         document.body.appendChild(sonido);
-        window.setTimeout(function(){
-            document.body.removeChild(sonido);
-        },13000);
+
     }
         
-    document.querySelector('#closeButton').onclick= (e)=>{
+    document.querySelector('.floatingBox').onclick= (e)=>{
         e.preventDefault();
-
+        console.log('llego');
         document.querySelector('.floatingBox').style.display = 'none';
         document.querySelector('.container').style.opacity='1';
     
@@ -167,6 +170,10 @@ const ventanaEmergente = (perdido=false)=>{
         analizarMovimiento();
         document.querySelector('.examenes').style.visibility = 'hidden';
         document.querySelector('.indicador').style.backgroundColor = "gray";
+
+        document.body.removeChild(sonido);
+        document.querySelector('#mainSong').volume = '0.5';
+        ponerMusica(canciones);
     };
 }
 
@@ -529,18 +536,28 @@ const comprobarVerde = ()=>{
 }
 
 window.onload = ()=>{
-    let canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3'];
+    
 
-    let sonido = document.createElement('audio');
-    sonido.src = canciones[numRandom(canciones.length)];
-    sonido.autoplay = true;
-    sonido.hidden = true;
-    sonido.loop = true;
-    sonido.volume = '0.5';
-    sonido.id = 'mainSong';
-    document.body.appendChild(sonido);
-
+    
+    ponerMusica(canciones);
     crearTablero();
     posicionarItems();
     analizarMovimiento();
+}
+
+const ponerMusica = (canciones)=>{
+    let sonido;
+    if(!document.querySelector('#mainSong')){
+        sonido = document.createElement('audio');
+        sonido.src = canciones[numRandom(canciones.length)];
+        sonido.autoplay = true;
+        sonido.hidden = true;
+        sonido.loop = true;
+        sonido.volume = '0.5';
+        sonido.id = 'mainSong';
+        document.body.appendChild(sonido);
+    }else{
+        sonido = document.querySelector('#mainSong');
+        sonido.src = canciones[numRandom(canciones.length)];
+    }
 }
