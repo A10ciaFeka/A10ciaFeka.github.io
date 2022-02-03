@@ -165,6 +165,7 @@ const ventanaEmergente = (perdido=false)=>{
     
         posicionarItems();
         analizarMovimiento();
+        document.querySelector('.examenes').style.visibility = 'hidden';
         document.querySelector('.indicador').style.backgroundColor = "gray";
     };
 }
@@ -499,6 +500,7 @@ const moverProtagonista = (filaFutura, columnaFutura)=>{
         }else{
             if(fila[filaFutura].children[columnaFutura].firstChild.id=='examenes'){
                 document.querySelector('.indicador').style.backgroundColor = "green";
+                document.querySelector('.examenes').style.visibility = 'visible';
                 fila[filaFutura].children[columnaFutura].removeChild(fila[filaFutura].children[columnaFutura].firstChild);
                 fila[filaFutura].children[columnaFutura].appendChild(protagonista);
             }        
