@@ -529,6 +529,17 @@ const comprobarVerde = ()=>{
 }
 
 window.onload = ()=>{
+    let canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3'];
+
+    let sonido = document.createElement('audio');
+    sonido.src = canciones[numRandom(canciones.length)];
+    sonido.autoplay = true;
+    sonido.hidden = true;
+    sonido.loop = true;
+    sonido.volume = '0.5';
+    sonido.id = 'mainSong';
+    document.body.appendChild(sonido);
+
     crearTablero();
     posicionarItems();
     analizarMovimiento();
