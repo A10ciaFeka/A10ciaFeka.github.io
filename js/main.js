@@ -114,7 +114,6 @@ window.onload = ()=>{
 
                 if(item.id=='btRegla'){
                     let reglas = document.querySelector('.reglas');
-                    console.log(reglas.style.display)
                     if(reglas.style.display=='none'){
                         reglas.style.display = 'block';
                     }else{
