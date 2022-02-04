@@ -69,7 +69,7 @@ const mejoresJugadores = ()=>{
 const construirTop = (i,index)=>{    
     let parr = document.createElement('p');
 
-    let texto = (index+1) + ' - '+i.nombre+': '+i.puntuacion;
+    let texto = (index+1) + ' - '+i.nombre+': '+i.puntuacion+' points';
     parr.appendChild(document.createTextNode(texto));
 
     document.querySelector('.topJugadores').appendChild(parr);
