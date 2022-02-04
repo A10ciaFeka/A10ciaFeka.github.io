@@ -49,8 +49,36 @@ const validarFormulario = ()=>{
 
 }
 
+const mejoresJugadores = ()=>{
+    const url = "https://darktestapi.herokuapp.com/user";
+    fetch(url, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json())
+    .then(data => {
+        data.forEach((i,index) => {
+            construirTop(i,index);
+        });
+    });
+}
+
+const construirTop = (i,index)=>{    
+    let parr = document.createElement('p');
+
+    let texto = (index+1) + ' - '+i.nombre+': '+i.puntuacion;
+    parr.appendChild(document.createTextNode(texto));
+
+    document.querySelector('.topJugadores').appendChild(parr);
+}
+
 window.onload = ()=>{
     document.querySelector('#introAudio').volume = '0.5';
+    mejoresJugadores();
+
     document.querySelectorAll('button').forEach(item =>{
         item.addEventListener('mouseover',(e)=>{
             let soundOver = document.createElement('audio');
@@ -104,6 +132,15 @@ window.onload = ()=>{
                         document.querySelector('.form').style.display = 'flex';
                         validarFormulario();
                     }
+                }
+
+                if(item.id=='puntuacion'){
+                    if(document.querySelector('.topJugadores').style.display == 'block'){
+                        document.querySelector('.topJugadores').style.display = 'none';
+                    }else{
+                        document.querySelector('.topJugadores').style.display = 'block';
+                    }
+                        
                 }
 
             }else if(item.id!='sound'){
