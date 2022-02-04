@@ -34,7 +34,10 @@
             100% { font-size: 8em; 
             }
         }
-
+        *{
+            margin: 0;
+            padding: 0;
+        }
         body{
             margin: 0;
             padding: 0;
@@ -51,15 +54,16 @@
         .header{
             text-align: center;
             font-family: Soul;
-            font-size: xx-large;
+            /* font-size: xx-large; */
             overflow: hidden;
             color: white;
-            background-color: black;
-            margin-bottom: 1.5em;
+            margin-top: 2em;
+            margin-bottom: 3em;
         }
         h1 {
             -webkit-text-stroke: 1.5px #7C623F;
             color: white; 
+            font-size: 80px;
         }
 
         .examenes{
@@ -131,21 +135,27 @@
                 width: 40px;
                 height: 40px;
             }
+            h1 {
+            font-size: 45px;
+            }
             .header{
-                padding: 1em;
+                
+                padding: 2em;
                 text-align: center;
                 font-family: Soul;
-                font-size: larger;
                 overflow: hidden;
                 color: white;
-                background-color: black;
+
                 margin-bottom: 1em;  
             }
             body{
-                background-image: url(assets/img/fondo3.jpg);
-               background-size: cover;
-                background-position:center;
+                background-image: url(assets/img/fondo.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                background-attachment: fixed;
                 color: white;
+                height: 100vh;
             }
             @keyframes fade-in {
             0% { opacity: 0; }
@@ -171,6 +181,10 @@
             }
             .floatingBox{
             font-size: 3em;
+            }
+            .indicador{
+                width: 75px;
+                height: 75px;
             }
         }
         footer{
