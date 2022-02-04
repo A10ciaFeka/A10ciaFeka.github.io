@@ -195,15 +195,15 @@
                         }
 
                         if(item.id=='jugar'){
-                            if(localStorage.getItem('usuario')){
+                            // if(localStorage.getItem('usuario')){
                         
                                 window.setTimeout(function(){
                                     window.location.href = 'juego.html';
                                 },1800);
-                            }else{
-                                document.querySelector('.form').style.display = 'flex';
-                                validarFormulario();
-                            }
+                            // }else{
+                            //     document.querySelector('.form').style.display = 'flex';
+                            //     validarFormulario();
+                            // }
                         }
         
                     }else if(item.id!='sound'){
