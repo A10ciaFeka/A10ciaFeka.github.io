@@ -58,7 +58,7 @@ const posicionarItems = ()=>{
 
     let obstaculoContador = 0;
     while(obstaculoContador<8){
-        let ale1 = numRandom(5)+1;
+        let ale1 = numRandom(5)+2;
         let ale2 = numRandom(7);
         
         if(!((ale1==0 && ale2==0)||(ale1==7&&ale2==7))){
