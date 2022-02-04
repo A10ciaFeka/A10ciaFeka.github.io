@@ -16,43 +16,42 @@
         }
 
         h1{
-            font-size: 50px;
+            font-size: 100px;
+            border-bottom: 2px solid white;
         }
 
-        body{
+        *{
             margin: 0;
             padding: 0;
             
             font-family: dsFontBold;
-            background-color: gray;
+        }
+
+        body{
+            background-color: black;
         }
 
         .container{
-            margin: 5em auto;
+            margin: 3em auto;
             padding: 2em;
-            background-color: black;
             color: whitesmoke;
             width: fit-content;
-            border: 2px solid black;
             border-radius: 10px;
             text-align: center;
         }
 
-        .button-6 {
+        .button-6{
             font-family: dsFont;
             align-items: center;
-            background-color: #FFFFFF;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: .25rem;
-            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-            box-sizing: border-box;
-            color: rgba(0, 0, 0, 0.85);
+            background-color: black;
+            border: none;
+            color: white;
             cursor: pointer;
             display: inline-flex;
-            font-size: 25px;
+            font-size: 40px;
             justify-content: center;
             line-height: 1;
-            margin-top: 1em;
+            margin-top: 1.5em;
             min-height: 3rem;
             padding: calc(.875rem - 1px) calc(1.5rem - 1px);
             position: relative;
@@ -62,22 +61,21 @@
             -webkit-user-select: none;
             touch-action: manipulation;
             vertical-align: baseline;
-            width: auto;
+            width: 200px;
+
         }
 
         .button-6:hover,
         .button-6:focus {
-            border-color: rgba(0, 0, 0, 0.15);
             box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
         }
 
         .button-6:hover {
+            background-image: linear-gradient(to right, black, rgb(184, 123, 10, 0.50), black);
             transform: translateY(-1px);
         }
 
         .button-6:active {
-            background-color: #F0F0F1;
-            border-color: rgba(0, 0, 0, 0.15);
             box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
             color: rgba(0, 0, 0, 0.65);
             transform: translateY(0);
@@ -98,19 +96,46 @@
             padding: 5px;
             background-color: gray;
             color: white;
+            width: 100px;
         }
 
-        .reglas h2{
-            border-bottom: 2px solid white;
+        .reglas{
+            margin-top: 1em;
         }
 
         .regla{
-            margin: 1em;
+            margin-top: 1em;
             border-bottom: 2px solid white;
+            padding: 1em;
+        }
+
+        .regla p{
+            margin-bottom: 1em;
         }
 
         .regla img{
             margin-bottom: 1em;
+        }
+
+        form{
+            margin-top: 2em;
+        }
+
+        input{
+            font-family: dsFont;
+            font-size: 22px;
+            text-align: center;
+
+            padding: 0.2em;
+        }
+
+        .mensaje{
+            background-color: red;
+            color: white;
+            padding: 1em;
+            text-align: center;
+            margin: 1em auto;
+            width: fit-content;
         }
     </style>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -120,7 +145,11 @@
 </head>
 <body>
     <audio src="assets/intro.mp3" autoplay preload="auto" hidden loop id="introAudio"></audio>
+    <div class="mensaje" style="visibility: hidden;">
+        Nombre no disponible
+    </div>
     <div class="container">
+
         <h1>Dark Tests</h1>
         <div class="botones">
             <div>
@@ -128,7 +157,8 @@
             </div>
             <div style="display: none;" class="form">
                 <form action="juego.html">
-                    <label>Nombre:<input type="text"></label>
+                    <input type="text" placeholder="nombre">
+                    <br>
                     <button class="button-6" id="btSubmit">Enviar</button>
                 </form>
             </div>
@@ -136,7 +166,6 @@
                 <button class="button-6" id="btRegla">Reglas</button>
             </div>
             <div class="reglas" style="display: none;">
-                <h2>Reglas</h2>
                 <div class="regla">
                     <p>Solamente puedes hacer movimientos verticales y horizontales</p>
                     <img src="assets/img/regla1.PNG" width="200">

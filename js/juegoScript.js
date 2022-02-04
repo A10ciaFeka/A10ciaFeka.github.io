@@ -145,7 +145,7 @@ const ventanaEmergente = (perdido=false)=>{
         document.querySelector('.floatingBox').style.animation = 'fade-in 10s linear';
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.floatingBox').style.color = 'Yellow';
-        document.querySelector('.texto').firstChild.textContent = 'YOU DEFEATED';
+        document.querySelector('.texto').firstChild.textContent = 'HEIR OF FIRE DESTROYED';
 
         sonido = document.createElement('audio');
         sonido.src = 'assets/defeated.mp3';

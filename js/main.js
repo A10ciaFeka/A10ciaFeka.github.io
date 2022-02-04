@@ -37,7 +37,11 @@ const validarFormulario = ()=>{
             },3000);
 
         }else{
-            alert('Nombre no disponible');
+            document.querySelector('.mensaje').style.visibility = 'visible';
+
+            window.setTimeout(function(){
+                document.querySelector('.mensaje').style.visibility = 'hidden';
+            },3000);
         }
 
     });
