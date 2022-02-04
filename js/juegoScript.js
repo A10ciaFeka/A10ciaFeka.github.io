@@ -1,5 +1,3 @@
-
-
 function numRandom(num){
     return Math.floor(Math.random()*num);
 }
