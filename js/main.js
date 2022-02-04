@@ -45,10 +45,25 @@ const validarFormulario = ()=>{
         }
 
     });
+
+
 }
 
 window.onload = ()=>{
+    document.querySelector('#introAudio').volume = '0.5';
     document.querySelectorAll('button').forEach(item =>{
+        item.addEventListener('mouseover',(e)=>{
+            let soundOver = document.createElement('audio');
+            soundOver.src = 'assets/button-hover.mp3';
+            soundOver.autoplay = true;
+            soundOver.hidden = true;
+            soundOver.volume = '1';
+            document.body.appendChild(soundOver);
+
+            window.setTimeout(function(){
+                document.body.removeChild(soundOver);
+            },1000);
+        });
         item.addEventListener('click',(e)=>{
 
             if(item.id!='mute' && item.id!='sound'){
