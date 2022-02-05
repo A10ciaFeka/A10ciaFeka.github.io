@@ -32,6 +32,7 @@ const validarFormulario = ()=>{
 
             insertarUsuario(objUsuario);
             localStorage.setItem('usuario',JSON.stringify(objUsuario));
+            pantallaCarga();
             window.setTimeout(function(){
                 document.querySelector('form').submit();
             },3000);
@@ -107,9 +108,10 @@ window.onload = ()=>{
                 },3000);
                 
                 if(item.id=='historia'){
+                    pantallaCarga();
                     window.setTimeout(function(){
                         window.location.href = 'historia.html';
-                    },1800);
+                    },3000);
                 }
 
                 if(item.id=='btRegla'){
@@ -123,10 +125,10 @@ window.onload = ()=>{
 
                 if(item.id=='jugar'){
                     if(localStorage.getItem('usuario')){
-                
+                        pantallaCarga();
                         window.setTimeout(function(){
                             window.location.href = 'juego.html';
-                        },1800);
+                        },3000);
                     }else{
                         document.querySelector('.form').style.display = 'flex';
                         validarFormulario();
@@ -153,4 +155,11 @@ window.onload = ()=>{
             }
         })
     });
+}
+
+const pantallaCarga = ()=>{
+    document.body.style.overflowY = 'hidden';
+    document.querySelector('.pantallaCarga').style.display = 'block';
+    document.querySelector('.container').style.opacity = '0';
+    
 }
