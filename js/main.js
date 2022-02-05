@@ -37,10 +37,10 @@ const validarFormulario = ()=>{
             },3000);
 
         }else{
-            document.querySelector('.mensaje').style.visibility = 'visible';
+            document.querySelector('.mensaje').style.display = 'block';
 
             window.setTimeout(function(){
-                document.querySelector('.mensaje').style.visibility = 'hidden';
+                document.querySelector('.mensaje').style.display = 'none';
             },3000);
         }
 

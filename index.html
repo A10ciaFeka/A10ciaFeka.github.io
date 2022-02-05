@@ -150,6 +150,14 @@
             font-size: 22px;
             color: black;
         }
+        @media screen and (max-width: 767px) {
+            h1{
+            font-size: 90px;
+            }
+            .container{
+                margin: auto;
+            }
+        }
     </style>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
     rel="stylesheet">
@@ -158,7 +166,7 @@
 </head>
 <body>
     <audio src="assets/intro.mp3" autoplay preload="auto" hidden loop id="introAudio"></audio>
-    <div class="mensaje" style="visibility: hidden;">
+    <div class="mensaje" style="display: none;">
         Nombre no disponible
     </div>
     <div class="container">
