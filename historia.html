@@ -4,155 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @font-face {
-            font-family: dsFontBold;
-            src: url('assets/fonts/OptimusPrincepsSemiBold.ttf');
-        }
 
-        @font-face {
-            font-family: dsFont;
-            src: url('assets/fonts/OptimusPrinceps.ttf');
-        }
-        body{
-            margin: 0;
-            padding: 0;
-            
-            font-family: dsFontBold;
-            background-color: white;
-        }
-
-        .header{
-            padding: 2em;
-            text-align: center;
-            font-size: larger;
-            overflow: hidden;
-            color: white;
-            background-color: black;
-           
-        }
-
-        .foto1{
-            background-image: url('assets/img/fondo.png');
-            position: relative;
-            background-position: center;
-            
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            min-height: 40em;
-        }
-
-        .container{
-            margin: 5em auto;
-            background-color: rgb(216, 216, 216);
-            border: 1px solid rgb(216, 216, 216);
-            border-radius: 15px;
-            width: 900px;
-            padding: 2em;
-            font-size: 20px;
-        }
-
-        .container h2{
-            text-align: center;
-        }
-
-        .container p{
-            font-family: dsFont;
-        }
-
-        @keyframes efectoBlur {
-            0%{
-                opacity: 0;
-                filter: blur(10px);
-            }
-        
-            100%{
-                opacity: 1;
-                filter: blur(0px);
-            }
-        }
-        
-        .button-6 {
-            font-family: dsFont;
-            align-items: center;
-            background-color: #FFFFFF;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: .25rem;
-            box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
-            box-sizing: border-box;
-            color: rgba(0, 0, 0, 0.85);
-            cursor: pointer;
-            display: inline-flex;
-            font-size: 25px;
-            justify-content: center;
-            line-height: 1;
-            margin-top: 1em;
-            min-height: 3rem;
-            padding: calc(.875rem - 1px) calc(1.5rem - 1px);
-            position: relative;
-            text-decoration: none;
-            transition: all 250ms;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: manipulation;
-            vertical-align: baseline;
-            width: auto;
-        }
-
-        .button-6:hover,
-        .button-6:focus {
-            border-color: rgba(0, 0, 0, 0.15);
-            box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
-        }
-
-        .button-6:hover {
-            transform: translateY(-1px);
-        }
-
-        .button-6:active {
-            background-color: #F0F0F1;
-            border-color: rgba(0, 0, 0, 0.15);
-            box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
-            color: rgba(0, 0, 0, 0.65);
-            transform: translateY(0);
-        }
-        a{
-            text-decoration: none;
-            color: black;
-        }
-        .boton{
-            margin-left: 2em;
-        }
-
-        .boton button{
-            margin-bottom: 1em;
-        }
-
-        .foto2{
-            text-align: center;
-            color: white;
-            position: relative;
-            background-position: center;
-            
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-image: url('assets/img/fondo3.jpg');
-            min-height: 40em;
-        }
-        .letrero{
-            padding: 2em;
-            color: white;
-            background-color: black;
-            font-size: 20px;
-        }
-        iframe{
-            margin: 7em auto;
-            padding: 3em;
-        }
-    </style>
     <script src="js/historia.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="assets/css/historiastyle.css">
     <title>Historia - Dark Tests</title>
 </head>
 <body>
@@ -177,7 +32,7 @@
     <div class="foto2">
         <div class="letrero"><h2>Trailer de la historia</h2></div>
         <div>
-            <iframe width="700" height="400" src="https://www.youtube.com/embed/UJGOnLfvYwM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/UJGOnLfvYwM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
 </body>

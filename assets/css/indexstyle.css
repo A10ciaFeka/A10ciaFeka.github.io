@@ -1,0 +1,153 @@
+@font-face {
+    font-family: dsFontBold;
+    src: url('../fonts/OptimusPrincepsSemiBold.ttf');
+}
+
+@font-face {
+    font-family: dsFont;
+    src: url('../fonts/OptimusPrinceps.ttf');
+}
+
+h1{
+    font-size: 100px;
+    border-bottom: 2px solid white;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    
+    font-family: dsFontBold;
+}
+
+body{
+    background-color: black;
+}
+
+.container{
+    margin: 3em auto;
+    padding: 2em;
+    color: whitesmoke;
+    width: fit-content;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.button-6{
+    font-family: dsFont;
+    align-items: center;
+    background-color: black;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 40px;
+    justify-content: center;
+    line-height: 1;
+    margin-top: 1.5em;
+    min-height: 3rem;
+    padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: 200px;
+
+}
+
+.button-6:hover,
+.button-6:focus {
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-6:hover {
+    background-image: linear-gradient(to right, black, rgb(184, 123, 10, 0.50), black);
+    transform: translateY(-1px);
+}
+
+.button-6:active {
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    color: rgba(0, 0, 0, 0.65);
+    transform: translateY(0);
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.botones{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#btSubmit{
+    font-size: 20px;
+    padding: 5px;
+    background-color: gray;
+    color: white;
+    width: 100px;
+}
+
+.reglas{
+    margin-top: 1em;
+}
+
+.regla{
+    margin-top: 1em;
+    border-bottom: 2px solid white;
+    padding: 1em;
+}
+
+.regla p{
+    margin-bottom: 1em;
+}
+
+.regla img{
+    margin-bottom: 1em;
+}
+
+form{
+    margin-top: 2em;
+}
+
+input{
+    font-family: dsFont;
+    font-size: 22px;
+    text-align: center;
+
+    padding: 0.2em;
+}
+
+.mensaje{
+    background-color: red;
+    color: white;
+    padding: 1em;
+    text-align: center;
+    margin: 1em auto;
+    width: fit-content;
+}
+
+.topJugadores{
+    margin-top: 2em;
+    background-color: whitesmoke;
+    border: 2px solid whitesmoke;
+    border-radius: 15px;
+}
+
+.topJugadores p{
+    padding: 0.5em;
+    font-size: 22px;
+    color: black;
+}
+@media screen and (max-width: 767px) {
+    h1{
+    font-size: 90px;
+    }
+    .container{
+        margin: auto;
+    }
+}
