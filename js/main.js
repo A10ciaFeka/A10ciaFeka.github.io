@@ -77,6 +77,10 @@ const construirTop = (i,index)=>{
 }
 
 window.onload = ()=>{
+    document.body.style.overflowY = 'scroll';
+    document.querySelector('.pantallaCarga').style.display = 'none';
+    document.querySelector('.container').style.opacity = '1';
+    
     document.querySelector('#introAudio').volume = '0.5';
     mejoresJugadores();
 
