@@ -169,6 +169,7 @@ const pantallaCarga = ()=>{
 }
 
 window.history.back = ()=>{
+    console.log('llego');
     document.body.style.overflowY = 'scroll';
     document.querySelector('.pantallaCarga').style.display = 'none';
     document.querySelector('.container').style.opacity = '1';
