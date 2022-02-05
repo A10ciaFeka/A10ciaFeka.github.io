@@ -1,5 +1,5 @@
 async function comprobarNombre(nombre){
-    const url = "https://darktestapi.herokuapp.com/user/'"+nombre+"'";
+    const url = "https://api-dark-tests.vercel.app/user/'"+nombre+"'";
     let resultado = await fetch(url);
     resultado = await resultado.json();
     
@@ -7,7 +7,7 @@ async function comprobarNombre(nombre){
 }
 
 const insertarUsuario = (objUsuario)=>{
-    const url = "https://darktestapi.herokuapp.com/user";
+    const url = "https://api-dark-tests.vercel.app/user";
     fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -51,7 +51,7 @@ const validarFormulario = ()=>{
 }
 
 const mejoresJugadores = ()=>{
-    const url = "https://darktestapi.herokuapp.com/user";
+    const url = "https://api-dark-tests.vercel.app/user";
     fetch(url, {
         method: 'GET',
         mode: 'cors',
