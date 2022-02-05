@@ -1,3 +1,6 @@
+window.history.back = ()=>{
+    window.location.href = 'index.html';
+}
 window.onload = ()=>{
             
     document.querySelector('h2').style.visibility = 'visible';
