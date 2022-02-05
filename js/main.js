@@ -35,8 +35,8 @@ const validarFormulario = ()=>{
             pantallaCarga();
             window.setTimeout(function(){
                 document.body.style.overflowY = 'scroll';
-                document.querySelector('.pantallaCarga').style.display = 'none';
                 document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.pantallaCarga').style.display = 'none';
                 document.querySelector('form').submit();
             },3000);
 
@@ -118,8 +118,8 @@ window.onload = ()=>{
                     pantallaCarga();
                     window.setTimeout(function(){
                         document.body.style.overflowY = 'scroll';
-                        document.querySelector('.pantallaCarga').style.display = 'none';
                         document.querySelector('.container').style.opacity = '1';
+                        document.querySelector('.pantallaCarga').style.display = 'none';
                         window.location.href = 'historia.html';
                     },3000);
                 }
@@ -138,8 +138,8 @@ window.onload = ()=>{
                         pantallaCarga();
                         window.setTimeout(function(){
                             document.body.style.overflowY = 'scroll';
-                            document.querySelector('.pantallaCarga').style.display = 'none';
                             document.querySelector('.container').style.opacity = '1';
+                            document.querySelector('.pantallaCarga').style.display = 'none';
                             window.location.href = 'juego.html';
                         },3000);
                     }else{
