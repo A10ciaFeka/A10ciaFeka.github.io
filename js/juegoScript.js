@@ -559,7 +559,3 @@ const ponerMusica = (canciones)=>{
         sonido.src = canciones[numRandom(canciones.length)];
     }
 }
-
-window.history.back = ()=>{
-    window.location.href = 'index.html';
-}

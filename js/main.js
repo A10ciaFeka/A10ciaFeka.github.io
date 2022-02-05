@@ -34,6 +34,9 @@ const validarFormulario = ()=>{
             localStorage.setItem('usuario',JSON.stringify(objUsuario));
             pantallaCarga();
             window.setTimeout(function(){
+                document.body.style.overflowY = 'scroll';
+                document.querySelector('.pantallaCarga').style.display = 'none';
+                document.querySelector('.container').style.opacity = '1';
                 document.querySelector('form').submit();
             },3000);
 
@@ -114,6 +117,9 @@ window.onload = ()=>{
                 if(item.id=='historia'){
                     pantallaCarga();
                     window.setTimeout(function(){
+                        document.body.style.overflowY = 'scroll';
+                        document.querySelector('.pantallaCarga').style.display = 'none';
+                        document.querySelector('.container').style.opacity = '1';
                         window.location.href = 'historia.html';
                     },3000);
                 }
@@ -131,6 +137,9 @@ window.onload = ()=>{
                     if(localStorage.getItem('usuario')){
                         pantallaCarga();
                         window.setTimeout(function(){
+                            document.body.style.overflowY = 'scroll';
+                            document.querySelector('.pantallaCarga').style.display = 'none';
+                            document.querySelector('.container').style.opacity = '1';
                             window.location.href = 'juego.html';
                         },3000);
                     }else{
