@@ -644,6 +644,5 @@ const pintarPuntuacionActual = ()=>{
 const fiesta = ()=>{
     var timer = setInterval(()=>{
         document.querySelector('#titulo').style.color = 'rgb('+numRandom(255)+','+numRandom(255)+','+numRandom(255)+')';
-        console.log(document.querySelector('.header').firstChild);
     },100)
 }
