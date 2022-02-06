@@ -135,7 +135,7 @@ input{
 .topJugadores{
     margin-top: 2em;
     background-color: whitesmoke;
-    border: 2px solid whitesmoke;
+    border: 2px solid rgb(184, 123, 10, 0.50);
     border-radius: 15px;
 }
 
