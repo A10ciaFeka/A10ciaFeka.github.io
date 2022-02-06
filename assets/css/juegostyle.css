@@ -58,15 +58,23 @@ h1 {
 }
 
 .examenes{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+.puntuacion{
+    margin-left: 4em;
+    padding: 0.5em 1em 1em 1em;
+    background-color: rgb(255, 255, 255, 0.5);
+    border: 1px solid whitesmoke;
+    border-radius: 15px;
 }
 
 .indicador{
     border: 2px solid black;
     width: 100px;
     height: 100px;
-
-    margin: 2em auto;
+    margin: 2 em;
 }
 .floatingBox{
     /* font-weight: bolder; */
@@ -117,6 +125,8 @@ img{
 @media screen and (max-width: 767px) {
     table{
         width: 360px;
+        height: 360px;
+        margin-bottom: 1em;
     }
     td{
         width: 40px;
@@ -175,6 +185,14 @@ img{
     .indicador{
         width: 75px;
         height: 75px;
+    }
+    .puntuacion{
+        margin-left: 5em;
+        color: black;
+        padding: 0.5em 1em 1em 1em;
+        background-color: rgb(255, 255, 255, 0.5);
+        border: 1px solid whitesmoke;
+        border-radius: 15px;
     }
 }
 footer{

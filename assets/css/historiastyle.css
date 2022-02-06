@@ -19,7 +19,7 @@ body{
 }
 
 .header{
-    padding: 2em;
+    padding: 3em;
     text-align: center;
     font-size: larger;
     overflow: hidden;
@@ -40,7 +40,7 @@ body{
 }
 
 .container{
-    margin: 5em auto;
+    margin: 2em auto;
     background-color: rgb(216, 216, 216);
     border: 1px solid rgb(216, 216, 216);
     border-radius: 15px;
@@ -51,6 +51,7 @@ body{
 
 .container h2{
     text-align: center;
+    margin-bottom: 1em;
 }
 
 .container p{
@@ -122,6 +123,9 @@ a{
     margin-left: 2em;
     vertical-align: middle;
     display: flex;
+    margin-top: 7em;
+    padding-bottom: 5em;
+    padding-top: 5em;
 }
 
 .boton button{
@@ -133,7 +137,6 @@ a{
     color: white;
     position: relative;
     background-position: center;
-    
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-image: url('../img/fondo3.jpg');
@@ -142,8 +145,11 @@ a{
 .letrero{
     padding: 2em;
     color: white;
-
     font-size: 20px;
+}
+.letrero h2{
+    margin-top: 2em;
+   
 }
 iframe{
     margin: 7em auto;
@@ -175,6 +181,17 @@ iframe{
     }
     .container{
         width: auto;
+        margin-left: 10px;
+        margin-right: 10px;
     }
-
+    .boton{
+        margin-left: 2em;
+        vertical-align: middle;
+        display: flex;
+        margin-top: 3em;
+    }
+    .letrero h2{
+        margin-top: 0;  
+        margin-bottom: 2em;
+    }
 }
