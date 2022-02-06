@@ -615,6 +615,7 @@ async function registrarRecord(nuevoObjeto){
 
 const guardarPuntuacion = async()=>{
     if(await comprobarRecord()){
+        console.log('llego record');
         let usuario = JSON.parse(localStorage.getItem('usuario'));
         const nuevoObjeto = {
             "user_name": usuario.user_name,
@@ -624,5 +625,7 @@ const guardarPuntuacion = async()=>{
         localStorage.setItem('usuario',JSON.stringify(nuevoObjeto));
         await registrarRecord(nuevoObjeto);
         alert('¡nuevo record!');
+    }else{
+        console.log('chupala');
     }
 }
