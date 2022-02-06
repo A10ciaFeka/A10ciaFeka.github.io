@@ -2,7 +2,10 @@
     font-family: Soul;
     src: url('../fonts/OptimusPrincepsSemiBold.ttf');
 }
-
+@font-face {
+    font-family: dsFont;
+    src: url('../fonts/OptimusPrinceps.ttf');
+}
 @keyframes fade-in {
     0% { opacity: 0; }
     25% { opacity: 1; }
@@ -69,10 +72,13 @@ h1 {
     border: 1px solid whitesmoke;
     border-radius: 15px;
     text-align: center;
+    font-family: dsFont;
+
 }
 
 .puntuacion p{
     margin-top: 1em;
+    font-size: 23px;
 }
 
 .indicador{
@@ -198,6 +204,8 @@ img{
         background-color: rgb(255, 255, 255, 0.5);
         border: 1px solid whitesmoke;
         border-radius: 15px;
+        font-family: dsFont;
+
     }
 }
 footer{
