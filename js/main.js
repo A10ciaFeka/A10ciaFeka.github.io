@@ -90,7 +90,7 @@ window.onload = ()=>{
     document.querySelectorAll('button').forEach(item =>{
         item.addEventListener('mouseover',(e)=>{
             let soundOver = document.createElement('audio');
-            soundOver.src = 'assets/button-hover.mp3';
+            soundOver.src = 'assets/sounds/button-hover.mp3';
             soundOver.autoplay = true;
             soundOver.hidden = true;
             soundOver.volume = '1';
@@ -104,7 +104,7 @@ window.onload = ()=>{
 
             if(item.id!='mute' && item.id!='sound'){
                 let sonido = document.createElement('audio');
-                sonido.src = 'assets/btpress.mp3';
+                sonido.src = 'assets/sounds/btpress.mp3';
                 sonido.autoplay = true;
                 sonido.hidden = true;
 

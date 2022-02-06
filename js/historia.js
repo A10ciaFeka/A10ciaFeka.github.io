@@ -20,7 +20,7 @@ window.onload = ()=>{
 
     document.querySelector('#menu').addEventListener('click',(e)=>{
         let sonido = document.createElement('audio');
-        sonido.src = 'assets/btpress.mp3';
+        sonido.src = 'assets/sounds/btpress.mp3';
         sonido.autoplay = true;
         sonido.hidden = true;
 
