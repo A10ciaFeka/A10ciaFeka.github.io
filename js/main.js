@@ -27,7 +27,7 @@ const validarFormulario = ()=>{
         if(await comprobarNombre(nombre)){
             objUsuario = {
                 "user_name": nombre,
-                "user_points": '0'
+                "user_points": "0"
             }
 
             insertarUsuario(objUsuario);
