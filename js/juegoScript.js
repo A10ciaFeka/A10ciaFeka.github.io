@@ -151,9 +151,8 @@ const ventanaEmergente = (perdido=false,record=false)=>{
         
         if(record){
             window.setTimeout(()=>{
-                document.querySelector('.texto').firstChild.textContent = 'HEIR OF FIRE DESTROYED<br>¡Nuevo record!';
-
-            },5000);
+                document.querySelector('.texto').firstChild.textContent += '\n¡Nuevo record!';
+            },3000);
         }
 
         sonido = document.createElement('audio');
@@ -184,6 +183,7 @@ const ventanaEmergente = (perdido=false,record=false)=>{
 
         document.querySelector('#pun').textContent = '1000';
         incrementoPun = 0;
+        pintarPuntuacionActual();
     };
 
 }
@@ -554,6 +554,7 @@ window.onload = ()=>{
     analizarMovimiento();
     document.querySelector('#pun').textContent = '1000';
     incrementoPun = 0;
+    pintarPuntuacionActual();
 }
 
 const ponerMusica = (canciones)=>{
@@ -612,7 +613,6 @@ async function registrarRecord(nuevoObjeto){
 
 const guardarPuntuacion = async()=>{
     if(comprobarRecord()){
-        console.log('llego record');
         let usuario = JSON.parse(localStorage.getItem('usuario'));
         const nuevoObjeto = {
             "user_name": usuario.user_name,
@@ -622,7 +622,10 @@ const guardarPuntuacion = async()=>{
         localStorage.setItem('usuario',JSON.stringify(nuevoObjeto));
         await registrarRecord(nuevoObjeto);
         ventanaEmergente(false,true);
-    }else{
-        console.log('chupala');
     }
+}
+
+const pintarPuntuacionActual = ()=>{
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    document.querySelector('#punAct').textContent = usuario.user_points;
 }
