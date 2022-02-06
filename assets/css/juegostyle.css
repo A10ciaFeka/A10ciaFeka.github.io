@@ -68,6 +68,11 @@ h1 {
     background-color: rgb(255, 255, 255, 0.5);
     border: 1px solid whitesmoke;
     border-radius: 15px;
+    text-align: center;
+}
+
+.puntuacion p{
+    margin-top: 1em;
 }
 
 .indicador{

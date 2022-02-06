@@ -44,6 +44,9 @@ examenes.src = 'assets/img/Ember.png';
 
 var obstaculoSrc = 'assets/img/obstaculo.png';
 
+var puntuacion = '4000';
+var incrementoPun = 0;
+
 const posicionarItems = ()=>{
     const fila = document.querySelectorAll('tr');
 
@@ -104,7 +107,6 @@ const posicionarItems = ()=>{
 *
 */
 
-//En principio funciona
 const getPos = (id)=>{
     const fila = document.querySelectorAll('tr');
     
@@ -146,6 +148,7 @@ const ventanaEmergente = (perdido=false)=>{
         document.querySelector('.floatingBox').style.animation = 'text-zoom 5s linear';
         document.querySelector('.floatingBox').style.color = 'Yellow';
         document.querySelector('.texto').firstChild.textContent = 'HEIR OF FIRE DESTROYED';
+        
 
         sonido = document.createElement('audio');
         sonido.src = 'assets/defeated.mp3';
@@ -155,7 +158,7 @@ const ventanaEmergente = (perdido=false)=>{
 
 
         document.body.appendChild(sonido);
-
+        guardarPuntuacion();
     }
         
     document.querySelector('.floatingBox').onclick= (e)=>{
@@ -166,13 +169,17 @@ const ventanaEmergente = (perdido=false)=>{
     
         posicionarItems();
         analizarMovimiento();
-        document.querySelector('.examenes').style.visibility = 'hidden';
+        document.querySelector('.indicador').style.visibility = 'hidden';
         document.querySelector('.indicador').style.backgroundColor = "gray";
 
         document.body.removeChild(sonido);
         document.querySelector('#mainSong').volume = '0.5';
         ponerMusica(canciones);
+
+        document.querySelector('#pun').textContent = '1000';
+        incrementoPun = 0;
     };
+
 }
 
 const ordenarMapa = (mapa)=>{
@@ -505,7 +512,7 @@ const moverProtagonista = (filaFutura, columnaFutura)=>{
         }else{
             if(fila[filaFutura].children[columnaFutura].firstChild.id=='examenes'){
                 document.querySelector('.indicador').style.backgroundColor = "green";
-                document.querySelector('.examenes').style.visibility = 'visible';
+                document.querySelector('.indicador').style.visibility = 'visible';
                 fila[filaFutura].children[columnaFutura].removeChild(fila[filaFutura].children[columnaFutura].firstChild);
                 fila[filaFutura].children[columnaFutura].appendChild(protagonista);
             }        
@@ -514,6 +521,7 @@ const moverProtagonista = (filaFutura, columnaFutura)=>{
         fila[filaFutura].children[columnaFutura].appendChild(protagonista);
     }
     
+    cambiarPuntuacion();
     analizarMovimiento();
     moverVillano();
     if(!comprobarVerde()){
@@ -534,13 +542,12 @@ const comprobarVerde = ()=>{
 }
 
 window.onload = ()=>{
-    
-
-    
     ponerMusica(canciones);
     crearTablero();
     posicionarItems();
     analizarMovimiento();
+    document.querySelector('#pun').textContent = '1000';
+    incrementoPun = 0;
 }
 
 const ponerMusica = (canciones)=>{
@@ -557,5 +564,56 @@ const ponerMusica = (canciones)=>{
     }else{
         sonido = document.querySelector('#mainSong');
         sonido.src = canciones[numRandom(canciones.length)];
+    }
+}
+
+const cambiarPuntuacion = ()=>{
+    let newPoints = parseInt(document.querySelector('#pun').textContent)-incrementoPun;
+
+    if(newPoints<0){
+        document.querySelector('#pun').textContent = '0';
+    }else{
+        document.querySelector('#pun').textContent = newPoints;
+        if(incrementoPun+5>100){
+            incrementoPun=100;
+        }else{
+            incrementoPun+=5;
+        }
+    }
+}
+
+async function comprobarRecord(){
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    const url = "https://api-dark-tests.vercel.app/user/'"+usuario.user_name+"'";
+    let resultado = await fetch(url);
+    resultado = await resultado.json();
+    
+    return resultado.puntuacion<parseInt(document.querySelector('#pun').textContent);
+}
+
+async function registrarRecord(nuevoObjeto){
+    let usuario = JSON.parse(localStorage.getItem('usuario'));
+    const url = "https://api-dark-tests.vercel.app/user/'"+usuario.user_name+"'";
+
+    fetch(url, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(nuevoObjeto)
+    })
+}
+
+const guardarPuntuacion = ()=>{
+    if(await comprobarRecord()){
+        const nuevoObjeto = {
+            "user_name": JSON.parse(localStorage.getItem('usuario')).user_name,
+            "puntuacion": parseInt(document.querySelector('#pun').textContent)
+        }
+
+        localStorage.setItem('usuario',nuevoObjeto);
+        await registrarRecord(nuevoObjeto);
     }
 }
