@@ -621,7 +621,7 @@ const guardarPuntuacion = async()=>{
 
         localStorage.setItem('usuario',JSON.stringify(nuevoObjeto));
         await registrarRecord(nuevoObjeto);
-        alert('¡nuevo record!');
+        ventanaEmergente(false,true);
     }else{
         console.log('chupala');
     }
