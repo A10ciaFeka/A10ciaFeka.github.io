@@ -581,10 +581,11 @@ const cambiarPuntuacion = ()=>{
         document.querySelector('#pun').textContent = '0';
     }else{
         document.querySelector('#pun').textContent = newPoints;
-        if(incrementoPun+5>100){
+        let ale = numRandom(11);
+        if(incrementoPun+ale>100){
             incrementoPun=100;
         }else{
-            incrementoPun+=5;
+            incrementoPun+=ale;
         }
     }
 }
