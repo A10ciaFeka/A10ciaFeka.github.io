@@ -24,7 +24,7 @@ const crearTablero = ()=>{
     document.querySelector('.container').insertBefore(tabla,document.querySelector('.examenes'));
 }
 
-var canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3','assets/soc.mp3','assets/mergit.mp3','assets/ludwig.mp3','assets/lau.mp3'];
+var canciones = ['assets/sounds/gwyn.mp3','assets/sounds/gerhman.mp3','assets/sounds/princes.mp3','assets/sounds/soc.mp3','assets/sounds/mergit.mp3','assets/sounds/ludwig.mp3','assets/sounds/lau.mp3'];
 
 var protagonista = document.createElement('img');
 protagonista.id = 'protagonista';
@@ -136,7 +136,7 @@ const ventanaEmergente = (perdido=false,record=false)=>{
         document.querySelector('.texto').firstChild.textContent = 'YOU DIED';
 
         sonido = document.createElement('audio');
-        sonido.src = 'assets/died.mp3';
+        sonido.src = 'assets/sounds/died.mp3';
         sonido.autoplay = true;
         sonido.volume = '1';
         sonido.hidden = true;
@@ -156,7 +156,7 @@ const ventanaEmergente = (perdido=false,record=false)=>{
         }
 
         sonido = document.createElement('audio');
-        sonido.src = 'assets/defeated.mp3';
+        sonido.src = 'assets/sounds/defeated.mp3';
         sonido.autoplay = true;
         sonido.volume = '0.5';
         sonido.hidden = true;
@@ -569,7 +569,7 @@ const ponerMusica = (canciones, ra=false)=>{
         if(!ra){
             sonido.src = canciones[numRandom(canciones.length)];
         }else{
-            sonido.src = 'assets/ra.mp3';
+            sonido.src = 'assets/sounds/ra.mp3';
             fiesta();
         }
         sonido.autoplay = true;
