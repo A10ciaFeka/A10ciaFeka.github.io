@@ -24,7 +24,7 @@ const crearTablero = ()=>{
     document.querySelector('.container').insertBefore(tabla,document.querySelector('.examenes'));
 }
 
-var canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3'];
+var canciones = ['assets/gwyn.mp3','assets/gerhman.mp3','assets/princes.mp3','assets/soc.mp3','assets/mergit.mp3','assets/ludwig.mp3','assets/lau.mp3'];
 
 var protagonista = document.createElement('img');
 protagonista.id = 'protagonista';
@@ -547,8 +547,13 @@ const comprobarVerde = ()=>{
     return false;
 }
 
-window.onload = ()=>{
-    ponerMusica(canciones);
+window.onload = ()=>{   
+    if(numRandom(10)<=1){
+        ponerMusica(canciones,true);    
+    }else{
+        ponerMusica(canciones);    
+    }
+    
     crearTablero();
     posicionarItems();
     analizarMovimiento();
@@ -557,11 +562,16 @@ window.onload = ()=>{
     pintarPuntuacionActual();
 }
 
-const ponerMusica = (canciones)=>{
+const ponerMusica = (canciones, ra=false)=>{
     let sonido;
     if(!document.querySelector('#mainSong')){
         sonido = document.createElement('audio');
-        sonido.src = canciones[numRandom(canciones.length)];
+        if(!ra){
+            sonido.src = canciones[numRandom(canciones.length)];
+        }else{
+            sonido.src = 'assets/ra.mp3';
+            fiesta();
+        }
         sonido.autoplay = true;
         sonido.hidden = true;
         sonido.loop = true;
@@ -629,4 +639,11 @@ const guardarPuntuacion = async()=>{
 const pintarPuntuacionActual = ()=>{
     let usuario = JSON.parse(localStorage.getItem('usuario'));
     document.querySelector('#punAct').textContent = usuario.user_points;
+}
+
+const fiesta = ()=>{
+    var timer = setInterval(()=>{
+        document.querySelector('#titulo').style.color = 'rgb('+numRandom(255)+','+numRandom(255)+','+numRandom(255)+')';
+        console.log(document.querySelector('.header').firstChild);
+    },100)
 }
