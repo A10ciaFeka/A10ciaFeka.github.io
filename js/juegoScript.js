@@ -615,5 +615,6 @@ const guardarPuntuacion = ()=>{
 
         localStorage.setItem('usuario',nuevoObjeto);
         await registrarRecord(nuevoObjeto);
+        alert('¡nuevo record!');
     }
 }
