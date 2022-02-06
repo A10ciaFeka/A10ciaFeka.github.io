@@ -588,14 +588,11 @@ const cambiarPuntuacion = ()=>{
     }
 }
 
-async function comprobarRecord(){
-    console.log((localStorage.getItem('usuario')));
+function comprobarRecord(){
     let usuario = JSON.parse(localStorage.getItem('usuario'));
-    const url = "https://api-dark-tests.vercel.app/user/'"+usuario.user_name+"'";
-    let resultado = await fetch(url);
-    resultado = await resultado.json();
-    
-    return resultado.user_points<parseInt(document.querySelector('#pun').textContent);
+    let puntosActuales = parseInt(document.querySelector('#pun').textContent);
+
+    return parseInt(usuario.user_points)<puntosActuales;
 }
 
 async function registrarRecord(nuevoObjeto){
@@ -614,7 +611,7 @@ async function registrarRecord(nuevoObjeto){
 }
 
 const guardarPuntuacion = async()=>{
-    if(await comprobarRecord()){
+    if(comprobarRecord()){
         console.log('llego record');
         let usuario = JSON.parse(localStorage.getItem('usuario'));
         const nuevoObjeto = {
