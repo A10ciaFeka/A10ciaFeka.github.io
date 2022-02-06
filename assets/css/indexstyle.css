@@ -22,6 +22,7 @@ h1{
 
 body{
     background-color: black;
+
 }
 
 .container{
@@ -150,4 +151,18 @@ input{
     .container{
         margin: auto;
     }
+}
+
+.pantallaCarga{
+    background-clip:padding-box; 
+    position: relative;
+    z-index: 3;
+    background-color: black;
+    width: 100%;
+    height: 100vh;
+    display: none;
+    top: 40vh;
+    text-align: center;
+    font-family: Soul;
+    font-size: 8em;
 }

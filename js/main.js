@@ -1,5 +1,5 @@
 async function comprobarNombre(nombre){
-    const url = "https://darktestapi.herokuapp.com/user/'"+nombre+"'";
+    const url = "https://api-dark-tests.vercel.app/user/'"+nombre+"'";
     let resultado = await fetch(url);
     resultado = await resultado.json();
     
@@ -7,7 +7,7 @@ async function comprobarNombre(nombre){
 }
 
 const insertarUsuario = (objUsuario)=>{
-    const url = "https://darktestapi.herokuapp.com/user";
+    const url = "https://api-dark-tests.vercel.app/user";
     fetch(url, {
         method: 'POST',
         mode: 'cors',
@@ -32,7 +32,11 @@ const validarFormulario = ()=>{
 
             insertarUsuario(objUsuario);
             localStorage.setItem('usuario',JSON.stringify(objUsuario));
+            pantallaCarga();
             window.setTimeout(function(){
+                document.body.style.overflowY = 'scroll';
+                document.querySelector('.container').style.opacity = '1';
+                document.querySelector('.pantallaCarga').style.display = 'none';
                 document.querySelector('form').submit();
             },3000);
 
@@ -50,7 +54,7 @@ const validarFormulario = ()=>{
 }
 
 const mejoresJugadores = ()=>{
-    const url = "https://darktestapi.herokuapp.com/user";
+    const url = "https://api-dark-tests.vercel.app/user";
     fetch(url, {
         method: 'GET',
         mode: 'cors',
@@ -76,6 +80,10 @@ const construirTop = (i,index)=>{
 }
 
 window.onload = ()=>{
+    document.body.style.overflowY = 'scroll';
+    document.querySelector('.pantallaCarga').style.display = 'none';
+    document.querySelector('.container').style.opacity = '1';
+
     document.querySelector('#introAudio').volume = '0.5';
     mejoresJugadores();
 
@@ -107,9 +115,13 @@ window.onload = ()=>{
                 },3000);
                 
                 if(item.id=='historia'){
+                    pantallaCarga();
                     window.setTimeout(function(){
+                        document.body.style.overflowY = 'scroll';
+                        document.querySelector('.container').style.opacity = '1';
+                        document.querySelector('.pantallaCarga').style.display = 'none';
                         window.location.href = 'historia.html';
-                    },1800);
+                    },3000);
                 }
 
                 if(item.id=='btRegla'){
@@ -123,10 +135,13 @@ window.onload = ()=>{
 
                 if(item.id=='jugar'){
                     if(localStorage.getItem('usuario')){
-                
+                        pantallaCarga();
                         window.setTimeout(function(){
+                            document.body.style.overflowY = 'scroll';
+                            document.querySelector('.container').style.opacity = '1';
+                            document.querySelector('.pantallaCarga').style.display = 'none';
                             window.location.href = 'juego.html';
-                        },1800);
+                        },3000);
                     }else{
                         document.querySelector('.form').style.display = 'flex';
                         validarFormulario();
@@ -153,4 +168,11 @@ window.onload = ()=>{
             }
         })
     });
+}
+
+const pantallaCarga = ()=>{
+    document.body.style.overflowY = 'hidden';
+    document.querySelector('.pantallaCarga').style.display = 'block';
+    document.querySelector('.container').style.opacity = '0';
+    
 }
