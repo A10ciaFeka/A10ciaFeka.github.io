@@ -24,8 +24,10 @@ body{
     font-size: larger;
     overflow: hidden;
     color: white;
-
-   
+}
+.header h1{
+    font-size: 50px;
+    -webkit-text-stroke: 0.5px #000000;
 }
 
 .foto1{
@@ -137,9 +139,10 @@ a{
     color: white;
     position: relative;
     background-position: center;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-image: url('../img/fondo3.jpg');
+    background-image: url('../img/fondo4.jpg');
     min-height: 40em;
 }
 .letrero{
@@ -147,8 +150,10 @@ a{
     color: white;
     font-size: 20px;
 }
-.letrero h2{
+.letrero h1{
     margin-top: 2em;
+    font-size: 50px;
+    -webkit-text-stroke: 0.5px #000000;
    
 }
 iframe{
@@ -176,7 +181,7 @@ iframe{
         width: 325px;
         height: 190px;
         margin: 0;
-        margin-top: 2em;
+        margin-top: 1em;
         padding: 0;
     }
     .container{
