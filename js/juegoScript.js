@@ -120,7 +120,7 @@ const getPos = (id)=>{
         }
     }
 }
-const ventanaEmergente = (perdido=false)=>{
+const ventanaEmergente = (perdido=false,record=false)=>{
     document.querySelector('.floatingBox').style.display = 'block';
     document.querySelector('.container').style.opacity='0.2';
     let fila = document.querySelectorAll('tr');
@@ -149,6 +149,12 @@ const ventanaEmergente = (perdido=false)=>{
         document.querySelector('.floatingBox').style.color = 'Yellow';
         document.querySelector('.texto').firstChild.textContent = 'HEIR OF FIRE DESTROYED';
         
+        if(record){
+            window.setTimeout(()=>{
+                document.querySelector('.texto').firstChild.textContent = 'HEIR OF FIRE DESTROYED<br>¡Nuevo record!';
+
+            },5000);
+        }
 
         sonido = document.createElement('audio');
         sonido.src = 'assets/defeated.mp3';
@@ -589,7 +595,7 @@ async function comprobarRecord(){
     let resultado = await fetch(url);
     resultado = await resultado.json();
     
-    return resultado.puntuacion<parseInt(document.querySelector('#pun').textContent);
+    return resultado.user_points<parseInt(document.querySelector('#pun').textContent);
 }
 
 async function registrarRecord(nuevoObjeto){
@@ -612,7 +618,7 @@ const guardarPuntuacion = async()=>{
         let usuario = JSON.parse(localStorage.getItem('usuario'));
         const nuevoObjeto = {
             "user_name": usuario.user_name,
-            "puntuacion": parseInt(document.querySelector('#pun').textContent)
+            "user_points": parseInt(document.querySelector('#pun').textContent)
         }
 
         localStorage.setItem('usuario',JSON.stringify(nuevoObjeto));
