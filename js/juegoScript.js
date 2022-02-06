@@ -548,7 +548,7 @@ const comprobarVerde = ()=>{
 }
 
 window.onload = ()=>{   
-    if(numRandom(10)<=1){
+    if(numRandom(20)<=1){
         ponerMusica(canciones,true);    
     }else{
         ponerMusica(canciones);    
