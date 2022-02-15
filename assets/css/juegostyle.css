@@ -42,7 +42,6 @@ body{
     background-repeat: no-repeat;
     background-position: top;
     background-size: cover;
-    overflow-y: hidden;
 }
 
 .header{
@@ -167,6 +166,7 @@ img{
         background-attachment: fixed;
         color: white;
         height: 100vh;
+        overflow-y: hidden;
     }
     @keyframes fade-in {
     0% { opacity: 0; }
